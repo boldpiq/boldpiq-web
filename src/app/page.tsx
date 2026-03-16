@@ -298,10 +298,10 @@ export default function Home() {
           </motion.div>
 
           {["Built", "To Grow."].map((line, i) => (
-            <div key={line} style={{ overflow: "hidden" }}>
+            <div key={line}>
               <motion.h1
-                initial={{ y: "105%" }}
-                animate={{ y: 0 }}
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 + i * 0.15 }}
                 style={{ fontSize: "clamp(64px, 13vw, 200px)", fontWeight: 900, lineHeight: 0.88, letterSpacing: "-0.04em", margin: 0, color: i === 1 ? ACCENT : "#fff" }}
               >

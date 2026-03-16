@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, type ReactNode } from "react"
+import { useState, useEffect, useRef, type ReactNode } from "react"
 import { motion, type Variants } from "motion/react"
 
 type Effect = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "clip-up" | "clip-down" | "scale" | "blur" | "rotate"
@@ -39,26 +39,41 @@ export function ScrollReveal({
   threshold = 0.1,
   className,
 }: ScrollRevealProps) {
-  // On touch devices (Safari iOS, Android) IntersectionObserver is unreliable.
-  // Skip it entirely — animate straight to visible on mount instead.
-  const [isTouch, setIsTouch] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
-  }, [])
+    // Fallback: force visible after 600ms regardless of IntersectionObserver
+    const fallback = setTimeout(() => setVisible(true), 600)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          clearTimeout(fallback)
+          if (once) observer.disconnect()
+        }
+      },
+      { threshold, rootMargin: "0px 0px -40px 0px" }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+
+    return () => {
+      clearTimeout(fallback)
+      observer.disconnect()
+    }
+  }, [once, threshold])
 
   const variants = getVariants(effect, distance)
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       variants={variants}
       initial="hidden"
-      // Touch: animate to visible immediately (no IO needed)
-      // Desktop: reveal on scroll via viewport intersection
-      animate={isTouch ? "visible" : undefined}
-      whileInView={isTouch ? undefined : "visible"}
-      viewport={isTouch ? undefined : { once, amount: threshold, margin: "0px 0px -40px 0px" }}
+      animate={visible ? "visible" : "hidden"}
       transition={{ delay }}
     >
       {children}
