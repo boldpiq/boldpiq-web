@@ -1,5 +1,6 @@
 "use client"
-import { motion, useRef, useAnimationFrame, useInView } from "motion/react"
+import { useRef } from "react"
+import { motion, useAnimationFrame, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"

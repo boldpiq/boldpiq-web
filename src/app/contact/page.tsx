@@ -1,5 +1,6 @@
 "use client"
-import { motion, useRef, useInView } from "motion/react"
+import { useRef } from "react"
+import { motion, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import { Footer } from "@/components/layout/Footer"
 import { GHLBookingWidget } from "@/components/ui/GHLBookingWidget"
