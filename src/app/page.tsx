@@ -257,12 +257,13 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
+        className="hero-full-height"
         style={{
-          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          padding: "0 clamp(20px, 4vw, 48px) 80px",
+          /* env(safe-area-inset-bottom) adds extra room for iPhones with home indicator */
+          padding: "0 clamp(20px, 4vw, 48px) max(80px, calc(env(safe-area-inset-bottom) + 60px))",
           position: "relative",
           overflow: "hidden",
         }}

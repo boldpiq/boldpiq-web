@@ -18,10 +18,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* iOS Safari: hero viewport height — 100vh includes browser chrome on iPhone,
+   100svh (small viewport height) anchors to the stable visible area */
+.hero-full-height {
+  min-height: 100vh;        /* fallback for older browsers */
+  min-height: 100svh;       /* iOS Safari 15.4+ — excludes address bar */
 }
 
 body {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist } from "next/font/google"
 import { LenisProvider } from "@/components/scroll/LenisProvider"
 import { PageTransition } from "@/components/transitions/PageTransition"
@@ -19,6 +19,13 @@ const geist = Geist({
 const SITE_URL = "https://www.boldpiq.com"
 const OG_IMAGE = "https://assets.cdn.filesafe.space/2YVSGppZ3t1nNSl74HPu/media/6970aa72d4fb90fe7dc9068b.png"
 const FAVICON = "https://assets.cdn.filesafe.space/2YVSGppZ3t1nNSl74HPu/media/6970121015885e63271908fa.png"
+
+// viewport-fit=cover lets env(safe-area-inset-*) work on iPhone notch/home indicator
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

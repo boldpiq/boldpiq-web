@@ -75,8 +75,18 @@ export function Navigation({
   })
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : ""
-    return () => { document.body.style.overflow = "" }
+    // iOS Safari ignores overflow:hidden on body alone — lock both html + body
+    if (open) {
+      document.documentElement.style.overflow = "hidden"
+      document.body.style.overflow = "hidden"
+    } else {
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+    }
   }, [open])
 
   const isDark = theme === "dark"
