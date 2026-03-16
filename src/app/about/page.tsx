@@ -1,6 +1,6 @@
 "use client"
 import { useRef } from "react"
-import { motion, useAnimationFrame, useInView } from "motion/react"
+import { motion, useAnimationFrame } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
@@ -36,13 +36,12 @@ function AboutHeroGlow() {
 }
 
 function Eyebrow({ label }: { label: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true })
   return (
-    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
       <motion.span
         initial={{ width: 0 }}
-        animate={inView ? { width: 32 } : { width: 0 }}
+        whileInView={{ width: 32 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
         style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
       />

@@ -29,6 +29,7 @@ export function LenisProvider({
 
   useEffect(() => {
     if (disabled) return
+    if (window.matchMedia("(pointer: coarse)").matches) return
 
     const lenis = new Lenis({ duration, easing })
     lenisRef.current = lenis

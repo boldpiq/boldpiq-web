@@ -28,13 +28,12 @@ function Section({ id, children, style, className }: { id?: string; children: Re
 }
 
 function Eyebrow({ label }: { label: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true })
   return (
-    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
       <motion.span
         initial={{ width: 0 }}
-        animate={inView ? { width: 32 } : { width: 0 }}
+        whileInView={{ width: 32 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
         style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
       />
@@ -46,7 +45,7 @@ function Eyebrow({ label }: { label: string }) {
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true })
+  const inView = useInView(ref, { once: true, amount: 0 })
   const decimals = Number.isInteger(to) ? 0 : 1
 
   useEffect(() => {
