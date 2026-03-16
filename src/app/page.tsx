@@ -107,13 +107,17 @@ function CaseCard({ tag, title, outcome, gradient }: { tag: string; title: strin
 
 function ProcessStep({ number, title, description }: { number: string; title: string; description: string }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: 24, paddingBottom: 48, borderBottom: `1px solid ${BORDER}` }}>
+    <motion.div
+      whileHover={{ x: 6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 28 }}
+      style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: 24, paddingBottom: 48, borderBottom: `1px solid ${BORDER}` }}
+    >
       <span style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 900, color: ACCENT, letterSpacing: "-0.04em", lineHeight: 1 }}>{number}</span>
       <div>
         <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, letterSpacing: "-0.02em" }}>{title}</h3>
         <p style={{ color: MUTED, lineHeight: 1.7, fontSize: 15 }}>{description}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -134,8 +138,8 @@ function ProcessGlow() {
   })
   return (
     <>
-      <div ref={ref1} style={{ position: "absolute", inset: -160, pointerEvents: "none", background: `radial-gradient(ellipse 55% 48% at 60% 40%, rgba(196,84,26,0.11) 0%, transparent 68%)`, willChange: "transform" }} />
-      <div ref={ref2} style={{ position: "absolute", inset: -120, pointerEvents: "none", background: `radial-gradient(ellipse 42% 38% at 38% 60%, rgba(196,84,26,0.06) 0%, transparent 62%)`, willChange: "transform" }} />
+      <div ref={ref1} style={{ position: "absolute", inset: -160, pointerEvents: "none", background: `radial-gradient(ellipse 55% 48% at 60% 40%, rgba(196,84,26,0.22) 0%, transparent 68%)`, willChange: "transform" }} />
+      <div ref={ref2} style={{ position: "absolute", inset: -120, pointerEvents: "none", background: `radial-gradient(ellipse 42% 38% at 38% 60%, rgba(196,84,26,0.13) 0%, transparent 62%)`, willChange: "transform" }} />
     </>
   )
 }
@@ -255,7 +259,12 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 60% 50% at 70% 40%, rgba(196,84,26,0.10) 0%, transparent 70%)` }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 70% 55% at 72% 38%, rgba(196,84,26,0.22) 0%, transparent 68%)` }} />
+        <motion.div
+          animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.12, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 40% 35% at 18% 75%, rgba(196,84,26,0.12) 0%, transparent 65%)` }}
+        />
         <div style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "rgba(255,255,255,0.022)", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}>01</div>
 
         <motion.div style={{ y: heroY, opacity: heroOpacity, maxWidth: 1400, width: "100%", margin: "0 auto" }}>
@@ -329,7 +338,7 @@ export default function Home() {
                 className={i < 2 ? "border-b md:border-b-0 md:border-r" : ""}
                 style={{
                   padding: "clamp(40px, 5vw, 64px) clamp(24px, 4vw, 48px)",
-                  background: i === 1 ? `rgba(196,84,26,0.08)` : SURFACE,
+                  background: i === 1 ? `rgba(196,84,26,0.16)` : SURFACE,
                   borderColor: BORDER,
                   height: "100%",
                 }}

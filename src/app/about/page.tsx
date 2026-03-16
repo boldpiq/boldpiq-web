@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "motion/react"
+import { motion, useRef, useAnimationFrame } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
@@ -9,6 +9,29 @@ const ACCENT = "#C4541A"
 const MUTED = "rgba(255,255,255,0.45)"
 const SURFACE = "rgba(255,255,255,0.05)"
 const BORDER = "rgba(255,255,255,0.08)"
+
+function AboutHeroGlow() {
+  const ref1 = useRef<HTMLDivElement>(null)
+  const ref2 = useRef<HTMLDivElement>(null)
+  useAnimationFrame((t) => {
+    if (ref1.current) {
+      const x = Math.sin(t * 0.00045) * 100
+      const y = Math.cos(t * 0.00032) * 60
+      ref1.current.style.transform = `translate(${x}px, ${y}px)`
+    }
+    if (ref2.current) {
+      const x = Math.cos(t * 0.00038) * 80
+      const y = Math.sin(t * 0.00055) * 50
+      ref2.current.style.transform = `translate(${x}px, ${y}px)`
+    }
+  })
+  return (
+    <>
+      <div ref={ref1} style={{ position: "absolute", inset: -200, pointerEvents: "none", background: `radial-gradient(ellipse 50% 45% at 75% 35%, rgba(196,84,26,0.20) 0%, transparent 65%)`, willChange: "transform" }} />
+      <div ref={ref2} style={{ position: "absolute", inset: -150, pointerEvents: "none", background: `radial-gradient(ellipse 38% 32% at 25% 70%, rgba(196,84,26,0.10) 0%, transparent 60%)`, willChange: "transform" }} />
+    </>
+  )
+}
 
 function Eyebrow({ label }: { label: string }) {
   return (
@@ -31,7 +54,8 @@ export default function AboutPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+        <AboutHeroGlow />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="About" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
@@ -103,11 +127,15 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
           {values.map((v, i) => (
             <ScrollReveal key={v.title} effect="fade-up" delay={i * 0.08}>
-              <div style={{ padding: "clamp(32px, 3vw, 48px)", border: `1px solid ${BORDER}`, borderRadius: 20, background: SURFACE }}>
+              <motion.div
+                whileHover={{ y: -5, borderColor: "rgba(196,84,26,0.35)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                style={{ padding: "clamp(32px, 3vw, 48px)", border: `1px solid ${BORDER}`, borderRadius: 20, background: SURFACE, cursor: "default" }}
+              >
                 <span style={{ fontSize: 13, color: ACCENT, letterSpacing: "0.1em", fontWeight: 700 }}>0{i + 1}</span>
                 <h3 style={{ fontSize: "clamp(20px, 2vw, 26px)", fontWeight: 800, letterSpacing: "-0.02em", margin: "16px 0 16px" }}>{v.title}</h3>
                 <p style={{ color: MUTED, fontSize: 15, lineHeight: 1.7 }}>{v.desc}</p>
-              </div>
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>
@@ -116,7 +144,7 @@ export default function AboutPage() {
       {/* STACK */}
       <section style={{ padding: "0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>
         <ScrollReveal effect="fade-up">
-          <div style={{ padding: "clamp(32px, 4vw, 64px)", border: `1px solid ${BORDER}`, borderRadius: 24, background: `linear-gradient(135deg, rgba(196,84,26,0.06) 0%, ${SURFACE} 100%)` }}>
+          <div style={{ padding: "clamp(32px, 4vw, 64px)", border: `1px solid ${BORDER}`, borderRadius: 24, background: `linear-gradient(135deg, rgba(196,84,26,0.14) 0%, ${SURFACE} 100%)` }}>
             <Eyebrow label="Our Stack" />
             <h2 style={{ fontSize: "clamp(28px, 3vw, 44px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 40 }}>
               Tools that let us build<br /><span style={{ color: ACCENT }}>without limits.</span>
@@ -132,10 +160,15 @@ export default function AboutPage() {
                 { name: "GoHighLevel", role: "CRM / Forms" },
                 { name: "Figma", role: "Design" },
               ].map(tool => (
-                <div key={tool.name} style={{ padding: "20px 24px", border: `1px solid ${BORDER}`, borderRadius: 14, background: SURFACE }}>
+                <motion.div
+                  key={tool.name}
+                  whileHover={{ y: -3, borderColor: "rgba(196,84,26,0.4)", background: "rgba(196,84,26,0.06)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  style={{ padding: "20px 24px", border: `1px solid ${BORDER}`, borderRadius: 14, background: SURFACE, cursor: "default" }}
+                >
                   <p style={{ fontWeight: 700, fontSize: 15, marginBottom: 4 }}>{tool.name}</p>
                   <p style={{ color: MUTED, fontSize: 12 }}>{tool.role}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

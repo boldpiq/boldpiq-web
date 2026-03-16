@@ -110,7 +110,12 @@ export default function WorkPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+        <motion.div
+          animate={{ opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 55% 48% at 78% 32%, rgba(196,84,26,0.20) 0%, transparent 65%)` }}
+        />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Our Work" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
@@ -158,11 +163,13 @@ export default function WorkPage() {
               const groupProjects = projects.filter(p => p.category === group.cat)
               return (
                 <div key={group.cat} style={{ marginBottom: 64 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 32 }}>
-                    <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
-                    <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{group.label}</span>
-                    <span style={{ flex: 1, height: 1, background: BORDER }} />
-                  </div>
+                  <ScrollReveal effect="fade-right">
+                    <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 32 }}>
+                      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+                      <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{group.label}</span>
+                      <span style={{ flex: 1, height: 1, background: BORDER }} />
+                    </div>
+                  </ScrollReveal>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: 16 }}>
                     {groupProjects.map((p, i) => (
                       <motion.div

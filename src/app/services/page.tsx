@@ -65,7 +65,12 @@ export default function ServicesPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+        <motion.div
+          animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 60% 50% at 80% 30%, rgba(196,84,26,0.20) 0%, transparent 68%)` }}
+        />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Services" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
@@ -104,12 +109,22 @@ export default function ServicesPage() {
                 { icon: "🤖", title: "GEO optimised", desc: "Structured to be cited by ChatGPT, Perplexity, and Google AI." },
                 { icon: "📊", title: "Analytics ready", desc: "Privacy-first analytics installed and verified before launch." },
                 { icon: "🚀", title: "30-day post-launch support", desc: "We stay available after go-live. No disappearing act." },
-              ].map(item => (
-                <div key={item.title}>
-                  <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
-                  <p style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{item.title}</p>
-                  <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
-                </div>
+              ].map((item, i) => (
+                <ScrollReveal key={item.title} effect="fade-up" delay={i * 0.06}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                    style={{ cursor: "default" }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                      style={{ fontSize: 28, marginBottom: 12, display: "inline-block" }}
+                    >{item.icon}</motion.div>
+                    <p style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{item.title}</p>
+                    <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.6 }}>{item.desc}</p>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>

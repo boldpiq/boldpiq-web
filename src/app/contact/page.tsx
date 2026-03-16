@@ -22,7 +22,7 @@ function Eyebrow({ label }: { label: string }) {
 
 export default function ContactPage() {
   return (
-    <main style={{ background: `radial-gradient(ellipse 50% 40% at 70% 30%, rgba(196,84,26,0.07) 0%, transparent 65%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
+    <main style={{ background: `radial-gradient(ellipse 60% 50% at 72% 28%, rgba(196,84,26,0.18) 0%, transparent 65%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
 
         {/* HERO */}
         <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 40px", maxWidth: 1400, margin: "0 auto" }}>
@@ -61,7 +61,11 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div style={{ padding: "32px", border: `1px solid ${BORDER}`, borderRadius: 20, background: SURFACE }}>
+                <motion.div
+                  animate={{ boxShadow: ["0 0 0px rgba(196,84,26,0)", "0 0 28px rgba(196,84,26,0.18)", "0 0 0px rgba(196,84,26,0)"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ padding: "32px", border: `1px solid rgba(196,84,26,0.25)`, borderRadius: 20, background: SURFACE }}
+                >
                   <p style={{ fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: MUTED, marginBottom: 20 }}>Guarantees</p>
                   {[
                     "Free initial consultation",
@@ -74,7 +78,7 @@ export default function ContactPage() {
                       <p style={{ color: "#fff", fontSize: 15 }}>{g}</p>
                     </div>
                   ))}
-                </div>
+                </motion.div>
 
                 <div>
                   <p style={{ fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: MUTED, marginBottom: 16 }}>Connect</p>
