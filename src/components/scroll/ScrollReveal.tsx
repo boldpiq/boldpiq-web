@@ -1,6 +1,6 @@
 "use client"
-import { useRef, type ReactNode } from "react"
-import { motion, useInView, type Variants } from "motion/react"
+import { type ReactNode } from "react"
+import { motion, type Variants } from "motion/react"
 
 type Effect = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "clip-up" | "clip-down" | "scale" | "blur" | "rotate"
 
@@ -39,17 +39,15 @@ export function ScrollReveal({
   threshold = 0.1,
   className,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once, amount: threshold })
   const variants = getVariants(effect, distance)
 
   return (
     <motion.div
-      ref={ref}
       className={className}
       variants={variants}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once, amount: threshold, margin: "0px 0px -40px 0px" }}
       transition={{ delay }}
     >
       {children}
