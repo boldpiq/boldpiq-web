@@ -262,8 +262,7 @@ export default function Home() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          /* env(safe-area-inset-bottom) adds extra room for iPhones with home indicator */
-          padding: "0 clamp(20px, 4vw, 48px) max(80px, calc(env(safe-area-inset-bottom) + 60px))",
+          padding: "0 clamp(20px, 4vw, 48px) 80px",
           position: "relative",
           overflow: "hidden",
         }}
