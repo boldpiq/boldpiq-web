@@ -1,6 +1,6 @@
 "use client"
-import { useState } from "react"
-import { motion } from "motion/react"
+import { useState, useRef } from "react"
+import { motion, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import Image from "next/image"
@@ -12,9 +12,16 @@ const MUTED = "rgba(255,255,255,0.45)"
 const BORDER = "rgba(255,255,255,0.08)"
 
 function Eyebrow({ label }: { label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
-      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+      <motion.span
+        initial={{ width: 0 }}
+        animate={inView ? { width: 32 } : { width: 0 }}
+        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+        style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
+      />
       <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{label}</span>
     </div>
   )
@@ -114,7 +121,7 @@ export default function WorkPage() {
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 55% 48% at 78% 32%, rgba(196,84,26,0.20) 0%, transparent 65%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 65% 55% at 80% 30%, rgba(196,84,26,0.30) 0%, transparent 64%)` }}
         />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Our Work" />
@@ -271,7 +278,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(11,15,28,0.5) 100%)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(196,84,26,0.12)", mixBlendMode: "multiply" }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(196,84,26,0.22)", mixBlendMode: "multiply" }} />
       </div>
 
       <div style={{ padding: "16px 20px 20px", display: "flex", flexDirection: "column", gap: 8, flexGrow: 1 }}>

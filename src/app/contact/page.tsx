@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "motion/react"
+import { motion, useRef, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import { Footer } from "@/components/layout/Footer"
 import { GHLBookingWidget } from "@/components/ui/GHLBookingWidget"
@@ -11,9 +11,16 @@ const SURFACE = "rgba(255,255,255,0.05)"
 const BORDER = "rgba(255,255,255,0.08)"
 
 function Eyebrow({ label }: { label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
-      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+      <motion.span
+        initial={{ width: 0 }}
+        animate={inView ? { width: 32 } : { width: 0 }}
+        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+        style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
+      />
       <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{label}</span>
     </div>
   )
@@ -22,7 +29,7 @@ function Eyebrow({ label }: { label: string }) {
 
 export default function ContactPage() {
   return (
-    <main style={{ background: `radial-gradient(ellipse 60% 50% at 72% 28%, rgba(196,84,26,0.18) 0%, transparent 65%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
+    <main style={{ background: `radial-gradient(ellipse 68% 56% at 74% 26%, rgba(196,84,26,0.30) 0%, transparent 64%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
 
         {/* HERO */}
         <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 40px", maxWidth: 1400, margin: "0 auto" }}>
@@ -52,11 +59,21 @@ export default function ContactPage() {
                       { step: "02", text: "A free 30-minute discovery call to understand your goals and vision." },
                       { step: "03", text: "A clear proposal with timeline and investment — delivered within 24 hours." },
                       { step: "04", text: "Project kickoff — we move fast once aligned." },
-                    ].map(item => (
-                      <div key={item.step} style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: ACCENT, letterSpacing: "0.08em", paddingTop: 3, flexShrink: 0 }}>{item.step}</span>
-                        <p style={{ color: MUTED, fontSize: 16, lineHeight: 1.6 }}>{item.text}</p>
-                      </div>
+                    ].map((item, i) => (
+                      <ScrollReveal key={item.step} effect="fade-right" delay={i * 0.1}>
+                        <motion.div
+                          whileHover={{ x: 6 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                          style={{ display: "flex", gap: 20, alignItems: "flex-start", cursor: "default" }}
+                        >
+                          <motion.span
+                            animate={{ textShadow: ["0 0 0px #C4541A", "0 0 12px #C4541A", "0 0 0px #C4541A"] }}
+                            transition={{ duration: 3, repeat: Infinity, delay: i * 0.7, ease: "easeInOut" }}
+                            style={{ fontSize: 12, fontWeight: 700, color: ACCENT, letterSpacing: "0.08em", paddingTop: 3, flexShrink: 0 }}
+                          >{item.step}</motion.span>
+                          <p style={{ color: MUTED, fontSize: 16, lineHeight: 1.6 }}>{item.text}</p>
+                        </motion.div>
+                      </ScrollReveal>
                     ))}
                   </div>
                 </div>

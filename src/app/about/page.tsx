@@ -1,5 +1,5 @@
 "use client"
-import { motion, useRef, useAnimationFrame } from "motion/react"
+import { motion, useRef, useAnimationFrame, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
@@ -27,16 +27,23 @@ function AboutHeroGlow() {
   })
   return (
     <>
-      <div ref={ref1} style={{ position: "absolute", inset: -200, pointerEvents: "none", background: `radial-gradient(ellipse 50% 45% at 75% 35%, rgba(196,84,26,0.20) 0%, transparent 65%)`, willChange: "transform" }} />
-      <div ref={ref2} style={{ position: "absolute", inset: -150, pointerEvents: "none", background: `radial-gradient(ellipse 38% 32% at 25% 70%, rgba(196,84,26,0.10) 0%, transparent 60%)`, willChange: "transform" }} />
+      <div ref={ref1} style={{ position: "absolute", inset: -200, pointerEvents: "none", background: `radial-gradient(ellipse 55% 50% at 76% 34%, rgba(196,84,26,0.30) 0%, transparent 65%)`, willChange: "transform" }} />
+      <div ref={ref2} style={{ position: "absolute", inset: -150, pointerEvents: "none", background: `radial-gradient(ellipse 40% 34% at 24% 72%, rgba(196,84,26,0.16) 0%, transparent 60%)`, willChange: "transform" }} />
     </>
   )
 }
 
 function Eyebrow({ label }: { label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
-      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+      <motion.span
+        initial={{ width: 0 }}
+        animate={inView ? { width: 32 } : { width: 0 }}
+        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+        style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
+      />
       <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{label}</span>
     </div>
   )
@@ -108,7 +115,11 @@ export default function AboutPage() {
                 className={i < 3 ? "border-b md:border-b-0 md:border-r" : ""}
                 style={{ padding: "clamp(32px, 4vw, 56px) clamp(20px, 3vw, 40px)", borderColor: BORDER }}
               >
-                <p style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 900, letterSpacing: "-0.04em", color: i % 2 === 1 ? ACCENT : "#fff", marginBottom: 8 }}>{stat}</p>
+                <motion.p
+                  animate={i % 2 === 1 ? { textShadow: ["0 0 0px #C4541A", "0 0 20px rgba(196,84,26,0.6)", "0 0 0px #C4541A"] } : {}}
+                  transition={i % 2 === 1 ? { duration: 4, repeat: Infinity, delay: i * 0.8, ease: "easeInOut" } : {}}
+                  style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 900, letterSpacing: "-0.04em", color: i % 2 === 1 ? ACCENT : "#fff", marginBottom: 8 }}
+                >{stat}</motion.p>
                 <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.5 }}>{label}</p>
               </div>
             </ScrollReveal>

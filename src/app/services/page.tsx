@@ -1,6 +1,6 @@
 "use client"
-import { useState } from "react"
-import { motion } from "motion/react"
+import { useState, useRef } from "react"
+import { motion, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
@@ -12,9 +12,16 @@ const SURFACE = "rgba(255,255,255,0.05)"
 const BORDER = "rgba(255,255,255,0.08)"
 
 function Eyebrow({ label }: { label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
-      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+      <motion.span
+        initial={{ width: 0 }}
+        animate={inView ? { width: 32 } : { width: 0 }}
+        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+        style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
+      />
       <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{label}</span>
     </div>
   )
@@ -69,7 +76,7 @@ export default function ServicesPage() {
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 60% 50% at 80% 30%, rgba(196,84,26,0.20) 0%, transparent 68%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 68% 56% at 82% 28%, rgba(196,84,26,0.30) 0%, transparent 67%)` }}
         />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Services" />
@@ -96,7 +103,11 @@ export default function ServicesPage() {
       {/* INCLUDED IN EVERY PROJECT */}
       <section style={{ padding: "clamp(60px, 8vw, 100px) clamp(20px, 4vw, 48px)", maxWidth: 1400, margin: "0 auto" }}>
         <ScrollReveal effect="fade-up">
-          <div style={{ padding: "clamp(32px, 4vw, 64px)", border: `1px solid ${BORDER}`, borderRadius: 24, background: SURFACE }}>
+          <motion.div
+            animate={{ boxShadow: ["0 0 0px rgba(196,84,26,0)", "0 0 40px rgba(196,84,26,0.22)", "0 0 0px rgba(196,84,26,0)"] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ padding: "clamp(32px, 4vw, 64px)", border: `1px solid rgba(196,84,26,0.20)`, borderRadius: 24, background: `linear-gradient(135deg, rgba(196,84,26,0.08) 0%, ${SURFACE} 60%)` }}
+          >
             <Eyebrow label="Always included" />
             <h2 style={{ fontSize: "clamp(28px, 3vw, 48px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 48 }}>
               Standard on every<br /><span style={{ color: ACCENT }}>BoldPiq project.</span>
@@ -127,7 +138,7 @@ export default function ServicesPage() {
                 </ScrollReveal>
               ))}
             </div>
-          </div>
+          </motion.div>
         </ScrollReveal>
       </section>
 

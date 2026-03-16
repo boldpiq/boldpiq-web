@@ -27,9 +27,16 @@ function Section({ id, children, style, className }: { id?: string; children: Re
 }
 
 function Eyebrow({ label }: { label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
-      <span style={{ width: 32, height: 1, background: ACCENT, flexShrink: 0 }} />
+    <div ref={ref} style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 32 }}>
+      <motion.span
+        initial={{ width: 0 }}
+        animate={inView ? { width: 32 } : { width: 0 }}
+        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+        style={{ height: 1, background: ACCENT, flexShrink: 0, display: "block" }}
+      />
       <span style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: MUTED }}>{label}</span>
     </div>
   )
@@ -138,8 +145,8 @@ function ProcessGlow() {
   })
   return (
     <>
-      <div ref={ref1} style={{ position: "absolute", inset: -160, pointerEvents: "none", background: `radial-gradient(ellipse 55% 48% at 60% 40%, rgba(196,84,26,0.22) 0%, transparent 68%)`, willChange: "transform" }} />
-      <div ref={ref2} style={{ position: "absolute", inset: -120, pointerEvents: "none", background: `radial-gradient(ellipse 42% 38% at 38% 60%, rgba(196,84,26,0.13) 0%, transparent 62%)`, willChange: "transform" }} />
+      <div ref={ref1} style={{ position: "absolute", inset: -160, pointerEvents: "none", background: `radial-gradient(ellipse 58% 52% at 60% 40%, rgba(196,84,26,0.30) 0%, transparent 68%)`, willChange: "transform" }} />
+      <div ref={ref2} style={{ position: "absolute", inset: -120, pointerEvents: "none", background: `radial-gradient(ellipse 44% 40% at 38% 62%, rgba(196,84,26,0.18) 0%, transparent 62%)`, willChange: "transform" }} />
     </>
   )
 }
@@ -259,13 +266,17 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 70% 55% at 72% 38%, rgba(196,84,26,0.22) 0%, transparent 68%)` }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 75% 60% at 74% 38%, rgba(196,84,26,0.32) 0%, transparent 68%)` }} />
         <motion.div
-          animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.12, 1] }}
+          animate={{ opacity: [0.55, 1, 0.55], scale: [1, 1.14, 1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 40% 35% at 18% 75%, rgba(196,84,26,0.12) 0%, transparent 65%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 42% 36% at 18% 76%, rgba(196,84,26,0.18) 0%, transparent 65%)` }}
         />
-        <div style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "rgba(255,255,255,0.022)", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}>01</div>
+        <motion.div
+          animate={{ opacity: [0.022, 0.045, 0.022] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "#fff", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}
+        >01</motion.div>
 
         <motion.div style={{ y: heroY, opacity: heroOpacity, maxWidth: 1400, width: "100%", margin: "0 auto" }}>
           <motion.div
@@ -338,11 +349,19 @@ export default function Home() {
                 className={i < 2 ? "border-b md:border-b-0 md:border-r" : ""}
                 style={{
                   padding: "clamp(40px, 5vw, 64px) clamp(24px, 4vw, 48px)",
-                  background: i === 1 ? `rgba(196,84,26,0.16)` : SURFACE,
+                  background: i === 1 ? `rgba(196,84,26,0.20)` : SURFACE,
                   borderColor: BORDER,
                   height: "100%",
+                  position: "relative",
                 }}
               >
+                {i === 1 && (
+                  <motion.div
+                    animate={{ opacity: [0.5, 1, 0.5], scaleX: [0.7, 1, 0.7] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${ACCENT}, transparent)`, transformOrigin: "center" }}
+                  />
+                )}
                 <div style={{ fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1, color: i === 1 ? ACCENT : "#fff", marginBottom: 20 }}>
                   <Counter to={stat} suffix={suffix} />
                 </div>
