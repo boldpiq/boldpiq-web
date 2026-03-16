@@ -286,7 +286,7 @@ export default function Home() {
           style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "#fff", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}
         >01</motion.div>
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity, maxWidth: 1400, width: "100%", margin: "0 auto" }}>
+        <motion.div style={{ y: heroY, opacity: heroOpacity, maxWidth: 1400, width: "100%", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
