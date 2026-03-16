@@ -257,8 +257,8 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="hero-full-height"
         style={{
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
