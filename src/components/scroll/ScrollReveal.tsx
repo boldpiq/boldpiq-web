@@ -1,5 +1,5 @@
 "use client"
-import { type ReactNode } from "react"
+import { useState, useEffect, type ReactNode } from "react"
 import { motion, type Variants } from "motion/react"
 
 type Effect = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "clip-up" | "clip-down" | "scale" | "blur" | "rotate"
@@ -39,6 +39,14 @@ export function ScrollReveal({
   threshold = 0.1,
   className,
 }: ScrollRevealProps) {
+  // On touch devices (Safari iOS, Android) IntersectionObserver is unreliable.
+  // Skip it entirely — animate straight to visible on mount instead.
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia("(pointer: coarse)").matches)
+  }, [])
+
   const variants = getVariants(effect, distance)
 
   return (
@@ -46,8 +54,11 @@ export function ScrollReveal({
       className={className}
       variants={variants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount: threshold, margin: "0px 0px -40px 0px" }}
+      // Touch: animate to visible immediately (no IO needed)
+      // Desktop: reveal on scroll via viewport intersection
+      animate={isTouch ? "visible" : undefined}
+      whileInView={isTouch ? undefined : "visible"}
+      viewport={isTouch ? undefined : { once, amount: threshold, margin: "0px 0px -40px 0px" }}
       transition={{ delay }}
     >
       {children}
