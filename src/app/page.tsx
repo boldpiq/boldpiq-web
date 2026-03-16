@@ -257,6 +257,7 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
+        className="hero-section"
         style={{
           minHeight: "100vh",
           display: "flex",
@@ -323,7 +324,7 @@ export default function Home() {
             <p style={{ fontSize: "clamp(15px, 1.4vw, 20px)", color: MUTED, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
               High-performance websites that attract, convert, and retain — engineered for businesses that refuse to blend in.
             </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <div className="hero-cta-wrap" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <motion.a href="/contact" whileHover={{ scale: 1.04, background: "#D4601F" }} whileTap={{ scale: 0.97 }} style={{ padding: "15px 36px", background: ACCENT, color: "#fff", borderRadius: 100, fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em", display: "inline-block" }}>Get Started</motion.a>
               <motion.a href="/work" whileHover={{ borderColor: "rgba(255,255,255,0.3)" }} style={{ padding: "15px 36px", border: `1px solid ${BORDER}`, color: "#fff", borderRadius: 100, fontWeight: 600, fontSize: 15, letterSpacing: "-0.01em", display: "inline-block" }}>See Our Work</motion.a>
             </div>

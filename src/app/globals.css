@@ -49,3 +49,18 @@ a {
     display: inline-block !important;
   }
 }
+
+/* ── Mobile hero fixes (iOS + Android Chrome on phone) ── */
+@media (max-width: 767px) {
+  /* On mobile the hero content nearly fills 100vh, so flex-end pushes the
+     badge right up behind the nav. Switch to flex-start + top clearance. */
+  .hero-section {
+    justify-content: flex-start !important;
+    padding-top: 108px !important; /* nav height (80px) + breathing room */
+  }
+
+  /* Stop hero CTA buttons from stretching full-width inside the flex column */
+  .hero-cta-wrap {
+    align-self: flex-start;
+  }
+}
