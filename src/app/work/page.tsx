@@ -118,55 +118,57 @@ export default function WorkPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "relative", overflow: "hidden" }}>
         <motion.div
           animate={{ opacity: [0.65, 1, 0.65] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 72% 60% at 82% 28%, rgba(196,84,26,0.40) 0%, transparent 64%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 80% 65% at 84% 26%, rgba(196,84,26,0.40) 0%, transparent 64%)` }}
         />
         <HeroRings side="right" />
         <DotGrid />
         <FloatingDots />
         <ScanLine />
         <CornerAccents />
-        <ScrollReveal effect="fade-up">
-          <Eyebrow label="Our Work" />
-          <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-            Proof in<br /><span style={{ color: ACCENT }}>Results.</span>
-          </h1>
-          <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
-            Real clients. Real outcomes. Every project measured against one thing — does it grow the business?
-          </p>
-        </ScrollReveal>
+        <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <ScrollReveal effect="fade-up">
+            <Eyebrow label="Our Work" />
+            <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
+              Proof in<br /><span style={{ color: ACCENT }}>Results.</span>
+            </h1>
+            <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
+              Real clients. Real outcomes. Every project measured against one thing — does it grow the business?
+            </p>
+          </ScrollReveal>
 
-        {/* Filter tabs */}
-        <ScrollReveal effect="fade-up" delay={0.1}>
-          <div style={{ display: "flex", gap: 12, marginTop: 56, flexWrap: "wrap" }}>
-            {filters.map(f => (
-              <motion.button
-                key={f}
-                onClick={() => setActive(f)}
-                whileTap={{ scale: 0.96 }}
-                style={{
-                  padding: "10px 28px",
-                  borderRadius: 100,
-                  border: `1px solid ${active === f ? ACCENT : BORDER}`,
-                  background: active === f ? ACCENT : "transparent",
-                  color: active === f ? "#fff" : MUTED,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  letterSpacing: "-0.01em",
-                  transition: "all 0.2s ease",
-                }}
-              >
-                {f}
-              </motion.button>
-            ))}
-          </div>
-        </ScrollReveal>
-      </section>
+          {/* Filter tabs */}
+          <ScrollReveal effect="fade-up" delay={0.1}>
+            <div style={{ display: "flex", gap: 12, marginTop: 56, flexWrap: "wrap" }}>
+              {filters.map(f => (
+                <motion.button
+                  key={f}
+                  onClick={() => setActive(f)}
+                  whileTap={{ scale: 0.96 }}
+                  style={{
+                    padding: "10px 28px",
+                    borderRadius: 100,
+                    border: `1px solid ${active === f ? ACCENT : BORDER}`,
+                    background: active === f ? ACCENT : "transparent",
+                    color: active === f ? "#fff" : MUTED,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    letterSpacing: "-0.01em",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  {f}
+                </motion.button>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+      </div>
 
       {/* PROJECT GRID */}
       <section style={{ padding: "0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>

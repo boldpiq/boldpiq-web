@@ -63,25 +63,27 @@ export default function AboutPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "relative", overflow: "hidden" }}>
         <AboutHeroGlow />
         <HeroRings side="left" />
         <DotGrid />
         <FloatingDots />
         <ScanLine />
         <CornerAccents />
-        <ScrollReveal effect="fade-up">
-          <Eyebrow label="About" />
-          <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-            We build<br /><span style={{ color: ACCENT }}>growth engines.</span>
-          </h1>
-        </ScrollReveal>
-        <ScrollReveal effect="fade-up" delay={0.1}>
-          <p style={{ fontSize: "clamp(17px, 1.6vw, 22px)", color: MUTED, maxWidth: 640, lineHeight: 1.7 }}>
-            BoldPiq is a web design and development agency built for businesses that refuse to blend in. We don&rsquo;t make pretty websites — we make websites that produce measurable growth.
-          </p>
-        </ScrollReveal>
-      </section>
+        <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <ScrollReveal effect="fade-up">
+            <Eyebrow label="About" />
+            <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
+              We build<br /><span style={{ color: ACCENT }}>growth engines.</span>
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal effect="fade-up" delay={0.1}>
+            <p style={{ fontSize: "clamp(17px, 1.6vw, 22px)", color: MUTED, maxWidth: 640, lineHeight: 1.7 }}>
+              BoldPiq is a web design and development agency built for businesses that refuse to blend in. We don&rsquo;t make pretty websites — we make websites that produce measurable growth.
+            </p>
+          </ScrollReveal>
+        </section>
+      </div>
 
       {/* STORY */}
       <section style={{ padding: "0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>

@@ -73,27 +73,29 @@ export default function ServicesPage() {
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
       {/* HERO */}
-      <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "relative", overflow: "hidden" }}>
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 75% 60% at 84% 26%, rgba(196,84,26,0.40) 0%, transparent 66%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 80% 65% at 85% 25%, rgba(196,84,26,0.40) 0%, transparent 66%)` }}
         />
         <HeroRings side="right" />
         <DotGrid />
         <FloatingDots />
         <ScanLine />
         <CornerAccents />
-        <ScrollReveal effect="fade-up">
-          <Eyebrow label="Services" />
-          <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-            What We<br /><span style={{ color: ACCENT }}>Build.</span>
-          </h1>
-          <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
-            Three core services. Every one designed to produce measurable growth — not just a deliverable to tick off a list.
-          </p>
-        </ScrollReveal>
-      </section>
+        <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <ScrollReveal effect="fade-up">
+            <Eyebrow label="Services" />
+            <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
+              What We<br /><span style={{ color: ACCENT }}>Build.</span>
+            </h1>
+            <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
+              Three core services. Every one designed to produce measurable growth — not just a deliverable to tick off a list.
+            </p>
+          </ScrollReveal>
+        </section>
+      </div>
 
       {/* SERVICE CARDS */}
       <section style={{ padding: "0 clamp(20px, 4vw, 48px)", maxWidth: 1400, margin: "0 auto" }}>
