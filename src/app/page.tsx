@@ -1,6 +1,6 @@
 "use client"
 import { useRef, useEffect, useState } from "react"
-import { motion, useScroll, useTransform, useInView, AnimatePresence, useAnimationFrame } from "motion/react"
+import { motion, useInView, AnimatePresence, useAnimationFrame } from "motion/react"
 import { VelocityMarquee } from "@/components/scroll/VelocityMarquee"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Image from "next/image"
@@ -246,8 +246,6 @@ function RotatingTestimonials() {
 
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"])
 
   return (
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
@@ -284,7 +282,7 @@ export default function Home() {
           style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "#fff", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}
         >01</motion.div>
 
-        <motion.div style={{ y: heroY, maxWidth: 1400, width: "100%", margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: 1400, width: "100%", margin: "0 auto", position: "relative", zIndex: 1 }}>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -327,7 +325,7 @@ export default function Home() {
               <motion.a href="/work" whileHover={{ borderColor: "rgba(255,255,255,0.3)" }} style={{ padding: "15px 36px", border: `1px solid ${BORDER}`, color: "#fff", borderRadius: 100, fontWeight: 600, fontSize: 15, letterSpacing: "-0.01em", display: "inline-block" }}>See Our Work</motion.a>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ── MARQUEE ──────────────────────────────────────────────── */}
