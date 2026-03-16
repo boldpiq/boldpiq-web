@@ -4,6 +4,7 @@ import { motion, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
+import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -76,8 +77,13 @@ export default function ServicesPage() {
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 68% 56% at 82% 28%, rgba(196,84,26,0.30) 0%, transparent 67%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 75% 60% at 84% 26%, rgba(196,84,26,0.40) 0%, transparent 66%)` }}
         />
+        <HeroRings side="right" />
+        <DotGrid />
+        <FloatingDots />
+        <ScanLine />
+        <CornerAccents />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Services" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>

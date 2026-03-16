@@ -3,6 +3,7 @@ import { motion, useRef, useAnimationFrame, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
+import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -27,8 +28,8 @@ function AboutHeroGlow() {
   })
   return (
     <>
-      <div ref={ref1} style={{ position: "absolute", inset: -200, pointerEvents: "none", background: `radial-gradient(ellipse 55% 50% at 76% 34%, rgba(196,84,26,0.30) 0%, transparent 65%)`, willChange: "transform" }} />
-      <div ref={ref2} style={{ position: "absolute", inset: -150, pointerEvents: "none", background: `radial-gradient(ellipse 40% 34% at 24% 72%, rgba(196,84,26,0.16) 0%, transparent 60%)`, willChange: "transform" }} />
+      <div ref={ref1} style={{ position: "absolute", inset: -200, pointerEvents: "none", background: `radial-gradient(ellipse 60% 55% at 25% 35%, rgba(196,84,26,0.38) 0%, transparent 65%)`, willChange: "transform" }} />
+      <div ref={ref2} style={{ position: "absolute", inset: -150, pointerEvents: "none", background: `radial-gradient(ellipse 42% 36% at 75% 70%, rgba(196,84,26,0.20) 0%, transparent 60%)`, willChange: "transform" }} />
     </>
   )
 }
@@ -63,6 +64,11 @@ export default function AboutPage() {
       {/* HERO */}
       <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
         <AboutHeroGlow />
+        <HeroRings side="left" />
+        <DotGrid />
+        <FloatingDots />
+        <ScanLine />
+        <CornerAccents />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="About" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>

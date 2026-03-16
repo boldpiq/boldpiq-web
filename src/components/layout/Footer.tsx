@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "motion/react"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -24,12 +25,33 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer style={{ borderTop: `1px solid ${BORDER}`, background: BG }}>
+    <footer style={{ borderTop: `1px solid ${BORDER}`, background: BG, position: "relative", overflow: "hidden" }}>
+      {/* Subtle accent glow */}
+      <motion.div
+        animate={{ opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 60% 50% at 20% 50%, rgba(196,84,26,0.14) 0%, transparent 65%)` }}
+      />
+      {/* Floating dots */}
+      {[
+        { x: "5%",  y: "30%", size: 3, delay: 0,   dur: 7  },
+        { x: "92%", y: "25%", size: 4, delay: 2,   dur: 9  },
+        { x: "75%", y: "70%", size: 3, delay: 1.2, dur: 8  },
+        { x: "18%", y: "75%", size: 3, delay: 3.5, dur: 6  },
+      ].map((d, i) => (
+        <motion.div
+          key={i}
+          animate={{ y: [0, -16, 0], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: d.dur, repeat: Infinity, ease: "easeInOut", delay: d.delay }}
+          style={{ position: "absolute", left: d.x, top: d.y, width: d.size, height: d.size, borderRadius: "50%", background: "rgba(196,84,26,0.7)", pointerEvents: "none" }}
+        />
+      ))}
       <div
         style={{
           maxWidth: 1400,
           margin: "0 auto",
           padding: "60px clamp(20px, 4vw, 48px) 32px",
+          position: "relative",
         }}
       >
         {/* Top row */}

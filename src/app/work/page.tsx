@@ -5,6 +5,7 @@ import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Link from "next/link"
 import Image from "next/image"
 import { Footer } from "@/components/layout/Footer"
+import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -119,10 +120,15 @@ export default function WorkPage() {
       {/* HERO */}
       <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 60px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
         <motion.div
-          animate={{ opacity: [0.7, 1, 0.7] }}
+          animate={{ opacity: [0.65, 1, 0.65] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 65% 55% at 80% 30%, rgba(196,84,26,0.30) 0%, transparent 64%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 72% 60% at 82% 28%, rgba(196,84,26,0.40) 0%, transparent 64%)` }}
         />
+        <HeroRings side="right" />
+        <DotGrid />
+        <FloatingDots />
+        <ScanLine />
+        <CornerAccents />
         <ScrollReveal effect="fade-up">
           <Eyebrow label="Our Work" />
           <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>

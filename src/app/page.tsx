@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import Image from "next/image"
 import { Footer } from "@/components/layout/Footer"
 import { GHLBookingWidget } from "@/components/ui/GHLBookingWidget"
+import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -266,14 +267,20 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 75% 60% at 74% 38%, rgba(196,84,26,0.32) 0%, transparent 68%)` }} />
+        {/* Background decor */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 80% 65% at 76% 36%, rgba(196,84,26,0.40) 0%, transparent 66%)` }} />
         <motion.div
-          animate={{ opacity: [0.55, 1, 0.55], scale: [1, 1.14, 1] }}
+          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 42% 36% at 18% 76%, rgba(196,84,26,0.18) 0%, transparent 65%)` }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(ellipse 44% 38% at 16% 78%, rgba(196,84,26,0.22) 0%, transparent 62%)` }}
         />
+        <HeroRings side="right" />
+        <DotGrid />
+        <FloatingDots />
+        <ScanLine />
+        <CornerAccents />
         <motion.div
-          animate={{ opacity: [0.022, 0.045, 0.022] }}
+          animate={{ opacity: [0.025, 0.055, 0.025] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           style={{ position: "absolute", bottom: -60, right: -40, fontSize: "clamp(120px, 30vw, 420px)", fontWeight: 900, color: "#fff", userSelect: "none", pointerEvents: "none", letterSpacing: "-0.05em", lineHeight: 1 }}
         >01</motion.div>
@@ -424,6 +431,7 @@ export default function Home() {
       {/* ── PROCESS ─────────────────────────────── */}
       <div style={{ position: "relative", overflow: "hidden" }}>
         <ProcessGlow />
+        <FloatingDots />
         <Section id="process" style={{ paddingTop: 40 }}>
           <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: "clamp(48px, 6vw, 100px)", alignItems: "start" }}>
             <ScrollReveal effect="fade-up">

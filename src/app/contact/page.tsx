@@ -3,6 +3,7 @@ import { motion, useRef, useInView } from "motion/react"
 import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import { Footer } from "@/components/layout/Footer"
 import { GHLBookingWidget } from "@/components/ui/GHLBookingWidget"
+import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -29,10 +30,15 @@ function Eyebrow({ label }: { label: string }) {
 
 export default function ContactPage() {
   return (
-    <main style={{ background: `radial-gradient(ellipse 68% 56% at 74% 26%, rgba(196,84,26,0.30) 0%, transparent 64%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
+    <main style={{ background: `radial-gradient(ellipse 75% 62% at 76% 24%, rgba(196,84,26,0.40) 0%, transparent 63%), ${BG}`, color: "#fff", minHeight: "100vh" }}>
 
         {/* HERO */}
-        <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 40px", maxWidth: 1400, margin: "0 auto" }}>
+        <section style={{ padding: "clamp(100px, 18vw, 160px) clamp(20px, 4vw, 48px) 40px", maxWidth: 1400, margin: "0 auto", position: "relative", overflow: "hidden" }}>
+          <HeroRings side="left" />
+          <DotGrid />
+          <FloatingDots />
+          <ScanLine />
+          <CornerAccents />
           <ScrollReveal effect="fade-up">
             <Eyebrow label="Get Started" />
             <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 32 }}>
