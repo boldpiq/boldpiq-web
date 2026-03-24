@@ -7,6 +7,8 @@ import { CookieConsent } from "@/components/ui/CookieConsent"
 import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import { GHLChatWidget } from "@/components/ui/GHLChatWidget"
 import Script from "next/script"
+import { headers } from 'next/headers'
+import { NonceProvider } from '@/lib/nonce'
 import "./globals.css"
 import "../styles/tokens.css"
 
@@ -153,7 +155,8 @@ const websiteSchema = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get('x-nonce') ?? ''
   return (
     <html lang="en">
       <head>
@@ -171,32 +174,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${geist.variable} antialiased`}>
-        <Navigation
-          items={navItems}
-          ctaLabel="Get Started"
-          ctaHref="/contact"
-          theme="dark"
-        />
-        <LenisProvider>
-          <PageTransition variant="fade">
-            {children}
-          </PageTransition>
-        </LenisProvider>
+        <NonceProvider nonce={nonce}>
+          <Navigation
+            items={navItems}
+            ctaLabel="Get Started"
+            ctaHref="/contact"
+            theme="dark"
+          />
+          <LenisProvider>
+            <PageTransition variant="fade">
+              {children}
+            </PageTransition>
+          </LenisProvider>
 
-        {/* Scroll to top button */}
-        <ScrollToTop />
+          {/* Scroll to top button */}
+          <ScrollToTop />
 
-        {/* Cookie Consent Banner */}
-        <CookieConsent />
+          {/* Cookie Consent Banner */}
+          <CookieConsent />
+        </NonceProvider>
 
         {/* GHL Booking & Form Embed Script (global — required for all booking widgets) */}
         <Script
           src="https://link.zip360.co.za/js/form_embed.js"
           strategy="afterInteractive"
+          nonce={nonce}
         />
 
         {/* GHL Chat Widget — injected outside React tree to prevent DOM reconciliation errors */}
-        <GHLChatWidget />
+        <GHLChatWidget nonce={nonce} />
       </body>
     </html>
   )
