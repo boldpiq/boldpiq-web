@@ -105,7 +105,9 @@ export function middleware(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
-  requestHeaders.set('content-security-policy', csp)
+  // Note: do NOT set content-security-policy on the request headers —
+  // CSP is a response header only. Setting it on the request would forward
+  // the nonce value to origin logs and downstream services.
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },
@@ -186,7 +188,69 @@ git commit -m "feat: remove static CSP from next.config.ts — now served dynami
 
 ---
 
-## Task 4: Update layout.tsx to read and distribute the nonce
+## Task 4: Update GHLChatWidget to accept and use nonce
+
+**Files:**
+- Modify: `src/components/ui/GHLChatWidget.tsx`
+
+> Must be done before Task 5 (layout.tsx) to avoid a TypeScript build error when layout passes the nonce prop.
+
+- [ ] **Step 1: Add nonce to the component props**
+
+Replace the entire file contents with:
+
+```typescript
+"use client"
+import { useEffect } from "react"
+
+interface GHLChatWidgetProps {
+  nonce?: string
+}
+
+export function GHLChatWidget({ nonce = '' }: GHLChatWidgetProps) {
+  useEffect(() => {
+    const div = document.createElement("div")
+    div.setAttribute("data-chat-widget", "")
+    div.setAttribute("data-widget-id", "68c905cf1c15b470ad4f3a1b")
+    div.setAttribute("data-location-id", "2YVSGppZ3t1nNSl74HPu")
+    document.body.appendChild(div)
+
+    const script = document.createElement("script")
+    script.src = "https://widgets.leadconnectorhq.com/loader.js"
+    script.dataset.resourcesUrl = "https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+    script.dataset.widgetId = "68c905cf1c15b470ad4f3a1b"
+    script.async = true
+    if (nonce) script.nonce = nonce
+    document.body.appendChild(script)
+
+    return () => {
+      div.remove()
+      script.remove()
+    }
+  }, [nonce])
+
+  return null
+}
+```
+
+- [ ] **Step 2: Verify build passes**
+
+```bash
+cd "/Users/mac/Documents/Website Design/boldpiq-web" && npm run build 2>&1 | tail -5
+```
+
+Expected: clean build, no TypeScript errors.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add src/components/ui/GHLChatWidget.tsx
+git commit -m "feat: add nonce prop to GHLChatWidget for CSP compliance"
+```
+
+---
+
+## Task 5: Update layout.tsx to read and distribute the nonce
 
 **Files:**
 - Modify: `src/app/layout.tsx`
@@ -253,73 +317,13 @@ Note: `<GHLChatWidget nonce={nonce} />` and the `<Script>` remain **outside** th
 cd "/Users/mac/Documents/Website Design/boldpiq-web" && npm run build 2>&1 | tail -10
 ```
 
-Expected: clean build. If TypeScript errors appear about `GHLChatWidget` not accepting a `nonce` prop, that is expected — it will be fixed in Task 5.
+Expected: clean build with no TypeScript errors.
 
 - [ ] **Step 7: Commit**
 
 ```bash
 git add src/app/layout.tsx
 git commit -m "feat: distribute CSP nonce from layout to Script components and NonceProvider"
-```
-
----
-
-## Task 5: Update GHLChatWidget to accept and use nonce
-
-**Files:**
-- Modify: `src/components/ui/GHLChatWidget.tsx`
-
-- [ ] **Step 1: Add nonce to the component props**
-
-Update the component to accept a `nonce` prop and apply it to the injected script:
-
-```typescript
-"use client"
-import { useEffect } from "react"
-
-interface GHLChatWidgetProps {
-  nonce?: string
-}
-
-export function GHLChatWidget({ nonce = '' }: GHLChatWidgetProps) {
-  useEffect(() => {
-    const div = document.createElement("div")
-    div.setAttribute("data-chat-widget", "")
-    div.setAttribute("data-widget-id", "68c905cf1c15b470ad4f3a1b")
-    div.setAttribute("data-location-id", "2YVSGppZ3t1nNSl74HPu")
-    document.body.appendChild(div)
-
-    const script = document.createElement("script")
-    script.src = "https://widgets.leadconnectorhq.com/loader.js"
-    script.dataset.resourcesUrl = "https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-    script.dataset.widgetId = "68c905cf1c15b470ad4f3a1b"
-    script.async = true
-    if (nonce) script.nonce = nonce
-    document.body.appendChild(script)
-
-    return () => {
-      div.remove()
-      script.remove()
-    }
-  }, [nonce])
-
-  return null
-}
-```
-
-- [ ] **Step 2: Verify build passes**
-
-```bash
-cd "/Users/mac/Documents/Website Design/boldpiq-web" && npm run build 2>&1 | tail -5
-```
-
-Expected: clean build, no TypeScript errors.
-
-- [ ] **Step 3: Commit**
-
-```bash
-git add src/components/ui/GHLChatWidget.tsx
-git commit -m "feat: add nonce prop to GHLChatWidget for CSP compliance"
 ```
 
 ---
@@ -440,6 +444,7 @@ Confirm `unsafe-inline` is **absent** from `script-src`.
 In DevTools → Elements tab, inspect `<script>` tags in `<head>` and `<body>`.
 Confirm each `<script>` that is not `type="application/ld+json"` has a `nonce` attribute.
 Confirm the nonce value matches the one in the CSP header.
+Confirm the two `<script type="application/ld+json">` tags in `<head>` do **not** have a `nonce` attribute — they are data scripts, not executable, and must remain unnonce-attributed.
 
 - [ ] **Step 4: Check browser console for CSP violations**
 
