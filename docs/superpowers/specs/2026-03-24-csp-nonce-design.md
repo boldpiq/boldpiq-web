@@ -1,6 +1,6 @@
 # CSP Nonce Hardening — Design Spec
 **Date:** 2026-03-24
-**Status:** Approved (v2 — post spec review)
+**Status:** Approved (v3 — post spec review)
 **Goal:** Remove `unsafe-inline` from `script-src` CSP while preserving all third-party widget functionality (GHL chat, booking, form embed, Cloudflare Turnstile).
 
 ---
@@ -51,9 +51,9 @@ Browser — trusts nonced scripts + anything strict-dynamic allows them to load
 | `next.config.ts` | **Delete** the entire `Content-Security-Policy` key from `headers()` — must be fully removed, not commented out. All other headers (HSTS, X-Frame-Options, etc.) stay. |
 | `src/lib/nonce.ts` | **New file** — `NonceContext` and `NonceProvider` client component |
 | `src/app/layout.tsx` | Read nonce via `headers()`, wrap children in `<NonceProvider nonce={nonce}>`, pass nonce to `<Script>` components and `<GHLChatWidget>` |
-| `src/components/ui/GHLChatWidget.tsx` | Accept `nonce` prop, set `script.nonce = nonce` before appending script to DOM |
+| `src/components/ui/GHLChatWidget.tsx` | Accept `nonce` prop passed **directly from `layout.tsx` as a prop** (not via `useNonce()` — `<GHLChatWidget>` is rendered outside the `<NonceProvider>` children boundary in the layout JSX tree). Set `script.nonce = nonce` before appending script to DOM. |
 | `src/components/ui/MathCaptcha.tsx` | Read nonce from `NonceContext`, pass as `scriptOptions={{ nonce }}` to `<Turnstile>` |
-| `src/app/onboarding/page.tsx` | Read nonce from `NonceContext`, pass as `nonce` prop to `<Script>` |
+| `src/app/onboarding/page.tsx` | Read nonce from `NonceContext` via `useNonce()`, pass as `nonce` prop to `<Script>`. Note: Next.js deduplicates `<Script>` tags with the same `src` — the onboarding `<Script src="https://link.zip360.co.za/js/form_embed.js">` may not re-execute if the global instance in `layout.tsx` already ran. If deduplication removes it, the nonce on the onboarding instance is moot; if it does execute, the nonce is required. Apply the nonce regardless to be safe. |
 
 ---
 
@@ -138,3 +138,4 @@ export const useNonce = () => useContext(NonceContext)
 - `style-src unsafe-inline` removal — requires Framer Motion refactor, separate task
 - JSON-LD structured data scripts (`type="application/ld+json"`) — exempt from `script-src`, no changes needed
 - `GHLBookingWidget` — renders an iframe only, no script injection, no changes needed
+- `src/components/analytics/Analytics.tsx` — **not currently imported or active in `layout.tsx`**. When activated, it must receive a `nonce` prop and pass it to `<Script nonce={nonce}>`. Activating this component without a nonce will cause a CSP violation and silent analytics failure. Add nonce support before enabling it.
