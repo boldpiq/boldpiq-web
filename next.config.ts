@@ -1,6 +1,9 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  // Suppress x-powered-by: Next.js header — avoid leaking framework info
+  poweredByHeader: false,
+
   // Strict mode disabled — Framer Motion AnimatePresence has DOM reconciliation issues with React 19 strict mode
   reactStrictMode: false,
 

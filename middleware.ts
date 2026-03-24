@@ -15,6 +15,8 @@ export function middleware(request: NextRequest) {
     "worker-src blob:",
     "frame-src https://link.zip360.co.za https://*.leadconnectorhq.com https://*.gohighlevel.com https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com",
     "frame-ancestors 'none'",
+    "object-src 'none'",
+    "base-uri 'self'",
   ].join('; ')
 
   const requestHeaders = new Headers(request.headers)
