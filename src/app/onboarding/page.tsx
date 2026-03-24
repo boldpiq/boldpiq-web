@@ -5,6 +5,7 @@ import { ScrollReveal } from "@/components/scroll/ScrollReveal"
 import { Footer } from "@/components/layout/Footer"
 import { HeroRings, DotGrid, FloatingDots, ScanLine, CornerAccents } from "@/components/ui/BackgroundDecor"
 import Script from "next/script"
+import { useNonce } from "@/lib/nonce"
 
 const BG = "#0B0F1C"
 const ACCENT = "#C4541A"
@@ -57,6 +58,7 @@ const steps = [
 ]
 
 export default function OnboardingPage() {
+  const nonce = useNonce()
   return (
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
 
@@ -196,6 +198,7 @@ export default function OnboardingPage() {
           <Script
             src="https://link.zip360.co.za/js/form_embed.js"
             strategy="afterInteractive"
+            nonce={nonce}
           />
         </ScrollReveal>
       </section>
