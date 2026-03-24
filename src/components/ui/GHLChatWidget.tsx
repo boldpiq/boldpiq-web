@@ -25,7 +25,7 @@ export function GHLChatWidget({ nonce = '' }: GHLChatWidgetProps) {
       div.remove()
       script.remove()
     }
-  }, [nonce])
+  }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
   return null
 }
