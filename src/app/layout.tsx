@@ -145,6 +145,10 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "Boldpiq",
   url: SITE_URL,
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", "h2", ".hero-description"],
+  },
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -152,6 +156,47 @@ const websiteSchema = {
       urlTemplate: `${SITE_URL}/work?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
+  },
+}
+
+// LocalBusiness / ProfessionalService schema
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  name: "Boldpiq",
+  url: SITE_URL,
+  logo: OG_IMAGE,
+  image: OG_IMAGE,
+  description: "Boldpiq is a South African web design and development agency building high-performance Next.js websites, brand identities, and e-commerce solutions.",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "ZA",
+    addressRegion: "Western Cape",
+  },
+  areaServed: ["ZA", "Africa", "International"],
+  priceRange: "$$",
+  sameAs: [
+    "https://www.instagram.com/boldpiq/",
+    "https://www.facebook.com/boldpiq",
+    "https://za.pinterest.com/boldpiq/",
+    "https://www.linkedin.com/company/boldpiq/",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "Customer Support",
+    url: `${SITE_URL}/contact`,
+    availableLanguage: "English",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Web Design & Development Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design", description: "Custom UI/UX design in Figma with motion design, responsive layouts, and conversion-focused architecture." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Development", description: "Next.js 15 development optimised for Core Web Vitals, AI search (GEO), and production security." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Brand Identity", description: "Full visual identity systems: logo, typography, colour palette, and brand guidelines." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "E-Commerce Development", description: "Custom Shopify and headless e-commerce solutions for South African and international retailers." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing", description: "GoHighLevel CRM automation — email, SMS, paid ads, and social media campaign management." } },
+    ],
   },
 }
 
@@ -171,6 +216,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body className={`${geist.variable} antialiased`}>

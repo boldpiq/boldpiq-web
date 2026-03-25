@@ -1,46 +1,48 @@
-# Boldpiq — Web Design & Development Agency
+# Boldpiq
 
-> Boldpiq crafts high-performance websites and graphics that captivate audiences and drive business growth for ambitious brands across South Africa and beyond.
+> Boldpiq is a South African web design and development agency building high-performance Next.js websites, brand identities, and e-commerce solutions for businesses across South Africa and internationally.
 
-## About
+## Services
 
-Boldpiq is a South African web design and development agency specialising in custom website design, Next.js development, brand identity, e-commerce, and GEO-optimised digital experiences. We build websites that attract, convert, and retain customers — engineered for businesses that refuse to blend in.
+- [Home](https://www.boldpiq.com/): Overview of Boldpiq's web design, development, branding, and digital marketing services with portfolio highlights and process overview.
+- [Services & Packages](https://www.boldpiq.com/services): Detailed breakdown of service packages — web design, Next.js development, brand identity, Shopify e-commerce, and digital marketing with pricing tiers.
+- [Book a Discovery Call](https://www.boldpiq.com/contact): Free 30-minute discovery call to discuss website requirements, timeline, and budget with the Boldpiq team.
+- [Book a 45-Min Strategy Session](https://www.boldpiq.com/contact45min): Extended 45-minute session for in-depth project scoping, existing-site audits, and digital strategy planning.
+- [About Boldpiq](https://www.boldpiq.com/about): Agency background, team, design philosophy, and approach to building high-converting web experiences.
 
-## Core Services
+## Portfolio
 
-- **Web Design** — Award-worthy UI/UX designs built in Figma with motion design and responsive layouts
-- **Web Development** — Fast, secure Next.js websites optimised for Core Web Vitals, AI search (GEO), and conversion
-- **Brand Identity** — Visual systems that command attention: logo, typography, colour, and full brand guidelines
-- **E-Commerce Development** — Custom Shopify and headless commerce solutions
-- **Digital Marketing** — Email, SMS, paid ads, and social media campaigns via GHL CRM
+- [Work & Case Studies](https://www.boldpiq.com/work): Portfolio of completed client projects across hospitality, professional services, retail, and non-profit sectors.
+- [Whitesons Case Study](https://www.boldpiq.com/work/case-whitesons): Website redesign and branding project for Whitesons.
+- [Bright Haven Case Study](https://www.boldpiq.com/work/case-bright-haven): Full website build and digital presence for Bright Haven.
+- [Netvirpret Case Study](https://www.boldpiq.com/work/case-netvirpret): Website and digital presence build for Netvirpret.
+- [The Cherri Chilli Case Study](https://www.boldpiq.com/work/case-the-cherri-chilli): E-commerce and brand identity for The Cherri Chilli.
 
-## Key Pages
+## Legal & Compliance
 
-- [Home](https://www.boldpiq.com/) — Overview of services, work, and process
-- [Services](https://www.boldpiq.com/services) — Full service offerings and packages
-- [Work](https://www.boldpiq.com/work) — Portfolio of completed projects
-- [About](https://www.boldpiq.com/about) — Agency story and team
-- [Contact / Book Discovery Call](https://www.boldpiq.com/contact) — Free 30-minute discovery call booking
-- [Book 45-Min Appointment](https://www.boldpiq.com/contact45min) — 45-minute strategy session for clients
-- [Refund Policy](https://www.boldpiq.com/refund) — Refund and cancellation terms
+- [Privacy Policy](https://www.boldpiq.com/privacy): POPIA and GDPR-compliant privacy policy covering data collection, storage, and user rights.
+- [Terms of Service](https://www.boldpiq.com/terms): Service terms governing project agreements, intellectual property, and payment conditions.
+- [Data Processing Agreement](https://www.boldpiq.com/dpa): GDPR-compliant DPA for clients whose projects involve personal data processing.
+- [PAIA Manual](https://www.boldpiq.com/paia): South African PAIA compliance manual as required by law.
+- [Refund Policy](https://www.boldpiq.com/refund): Refund and cancellation terms for project retainers and service packages.
 
-## Location & Coverage
+## Key Facts
 
-- Based in South Africa
-- Services: South Africa, Western Cape, Cape Town, Johannesburg, Pretoria — and international clients
-- Remote-first agency
+- Location: South Africa (Cape Town-based, remote-first, serving clients nationally and internationally)
+- Specialisation: Next.js web development, UI/UX design, brand identity, Shopify e-commerce
+- Technology stack: Next.js 15, React 19, TypeScript, Tailwind CSS, Framer Motion, Sanity CMS
+- Markets served: South Africa (Cape Town, Johannesburg, Pretoria), Sub-Saharan Africa, international clients
+- CRM platform: GoHighLevel (GHL) for client automation — email, SMS, booking, and pipeline management
+- Differentiator: GEO-optimised websites (AI search ready) built for Core Web Vitals and conversion performance
+- Compliance: POPIA, GDPR, PAIA compliant
+- Industry: Web design and development agency
 
-## Social Profiles
+## Contact
 
+- Website: https://www.boldpiq.com
+- Email: admin@boldpiq.com
+- Book a call: https://www.boldpiq.com/contact
 - Instagram: https://www.instagram.com/boldpiq/
-- Facebook: https://www.facebook.com/boldpiq
 - LinkedIn: https://www.linkedin.com/company/boldpiq/
+- Facebook: https://www.facebook.com/boldpiq
 - Pinterest: https://za.pinterest.com/boldpiq/
-
-## Legal
-
-- Privacy Policy: https://www.boldpiq.com/privacy
-- Terms of Service: https://www.boldpiq.com/terms
-- DPA: https://www.boldpiq.com/dpa
-- PAIA Manual: https://www.boldpiq.com/paia
-- Refund Policy: https://www.boldpiq.com/refund
