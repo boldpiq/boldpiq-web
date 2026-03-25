@@ -1,6 +1,9 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  // Suppress x-powered-by: Next.js header (framework fingerprinting)
+  poweredByHeader: false,
+
   // Strict mode disabled — Framer Motion AnimatePresence has DOM reconciliation issues with React 19 strict mode
   reactStrictMode: false,
 
@@ -40,6 +43,9 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), interest-cohort=(), browsing-topics=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+          // Prevents cross-origin window access (Spectre mitigation). 'same-origin-allow-popups'
+          // used instead of 'same-origin' to preserve GHL chat popup window functionality.
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         ],
       },
     ]

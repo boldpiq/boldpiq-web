@@ -1,0 +1,5 @@
+Contact: mailto:security@boldpiq.com
+Expires: 2027-03-25T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.boldpiq.com/.well-known/security.txt
+Policy: https://www.boldpiq.com/security-policy
