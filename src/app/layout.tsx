@@ -25,10 +25,10 @@ const FAVICON = "https://assets.cdn.filesafe.space/2YVSGppZ3t1nNSl74HPu/media/69
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Boldpiq: Crafting Stunning Websites & Graphics",
-    template: "%s | Boldpiq",
+    default: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
+    template: "%s | BoldPiq",
   },
-  description: "At Boldpiq, we craft powerful websites and graphics that captivate audiences. High-performance web design, development, and branding for businesses that demand results. Transform your digital presence today!",
+  description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
   keywords: [
     "boldpiq", "web design", "graphic design", "branding", "e-commerce development",
     "responsive design", "digital experiences", "website development", "custom web design",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_ZA",
     url: SITE_URL,
-    siteName: "Boldpiq",
-    title: "Boldpiq: Crafting Stunning Websites & Graphics",
-    description: "At Boldpiq, we craft powerful websites and graphics that captivate audiences. Transform your digital presence today!",
+    siteName: "BoldPiq",
+    title: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
+    description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
     images: [
       {
         url: OG_IMAGE,
@@ -79,8 +79,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boldpiq: Crafting Stunning Websites & Graphics",
-    description: "At Boldpiq, we craft powerful websites and graphics that captivate audiences. Transform your digital presence today!",
+    title: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
+    description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
     images: [OG_IMAGE],
     creator: "@boldpiq",
   },
@@ -223,6 +223,25 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className={`${geist.variable} antialiased`}>
+        <a
+          href="#main-content"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            top: "auto",
+            width: 1,
+            height: 1,
+            overflow: "hidden",
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.cssText = "position:fixed;top:16px;left:16px;width:auto;height:auto;overflow:visible;z-index:9999;padding:8px 16px;background:#fff;color:#000;fontWeight:600;borderRadius:8px;boxShadow:0 2px 8px rgba(0,0,0,0.3);textDecoration:none;"
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.cssText = "position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+          }}
+        >
+          Skip to main content
+        </a>
         <NonceProvider nonce={nonce}>
           <Navigation
             items={navItems}

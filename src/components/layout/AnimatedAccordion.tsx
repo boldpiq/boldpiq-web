@@ -36,6 +36,8 @@ export function AnimatedAccordion({ items, allowMultiple = false, className }: A
           >
             <button
               onClick={() => toggle(item.id)}
+              aria-expanded={isOpen}
+              aria-controls={`accordion-panel-${item.id}`}
               style={{
                 width: "100%",
                 padding: "16px 20px",
@@ -55,6 +57,7 @@ export function AnimatedAccordion({ items, allowMultiple = false, className }: A
                 animate={{ rotate: isOpen ? 45 : 0 }}
                 transition={{ duration: 0.2, ease: "easeInOut" }}
                 style={{ display: "inline-block", fontSize: 20, lineHeight: 1 }}
+                aria-hidden="true"
               >
                 +
               </motion.span>
@@ -62,6 +65,8 @@ export function AnimatedAccordion({ items, allowMultiple = false, className }: A
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={`accordion-panel-${item.id}`}
+                  role="region"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}

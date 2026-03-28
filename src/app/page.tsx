@@ -297,18 +297,22 @@ export default function Home() {
             Web Design &amp; Development Agency
           </motion.div>
 
-          {["Built", "To Grow."].map((line, i) => (
-            <div key={line}>
-              <motion.h1
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 + i * 0.15 }}
-                style={{ fontSize: "clamp(64px, 13vw, 200px)", fontWeight: 900, lineHeight: 0.88, letterSpacing: "-0.04em", margin: 0, color: i === 1 ? ACCENT : "#fff" }}
-              >
-                {line}
-              </motion.h1>
-            </div>
-          ))}
+          <motion.h1
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+            style={{ fontSize: "clamp(64px, 13vw, 200px)", fontWeight: 900, lineHeight: 0.88, letterSpacing: "-0.04em", margin: 0 }}
+          >
+            <span style={{ color: "#fff", display: "block" }}>Built</span>
+            <motion.span
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.45 }}
+              style={{ color: ACCENT, display: "block" }}
+            >
+              To Grow.
+            </motion.span>
+          </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}

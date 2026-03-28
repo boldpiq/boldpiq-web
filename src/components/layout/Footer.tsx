@@ -70,7 +70,7 @@ export function Footer() {
           </div>
 
           {/* Nav links */}
-          <nav>
+          <nav aria-label="Footer navigation">
             <p style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: MUTED, marginBottom: 16 }}>Navigation</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {[

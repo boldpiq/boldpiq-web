@@ -125,7 +125,7 @@ export function Navigation({
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex" style={{ gap: 36, alignItems: "center" }}>
+        <nav aria-label="Main navigation" className="hidden md:flex" style={{ gap: 36, alignItems: "center" }}>
           {items.map((item) => (
             <MagneticLink key={item.href} href={item.href} color={fg}>
               {item.label}
@@ -254,7 +254,7 @@ export function Navigation({
             </div>
 
             {/* ── NAV LINKS ── */}
-            <nav style={{ padding: "24px clamp(20px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
+            <nav aria-label="Mobile navigation" style={{ padding: "24px clamp(20px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
               {items.map((item, i) => (
                 <motion.div
                   key={item.href}

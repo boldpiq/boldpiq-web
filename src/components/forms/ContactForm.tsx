@@ -11,6 +11,7 @@ const schema = z.object({
   email:   z.string().email("Please enter a valid email"),
   company: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  consent: z.literal(true, { error: () => ({ message: "You must agree to continue" }) }),
 })
 
 type FormData = z.infer<typeof schema>
@@ -29,8 +30,7 @@ const inputStyle: React.CSSProperties = {
   padding: "14px 16px",
   color: "var(--color-text, #fff)",
   fontSize: "15px",
-  outline: "none",
-  transition: "border-color 200ms",
+  transition: "border-color 200ms, outline-color 200ms",
 }
 
 export function ContactForm({ onSubmit, className }: ContactFormProps) {
@@ -56,27 +56,67 @@ export function ContactForm({ onSubmit, className }: ContactFormProps) {
       {/* Name + Email row */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div>
-          <input {...register("name")} placeholder="Name" style={inputStyle} />
-          {errors.name && <p style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.name.message}</p>}
+          <input
+            {...register("name")}
+            placeholder="Name"
+            aria-label="Your name"
+            aria-describedby={errors.name ? "name-error" : undefined}
+            aria-invalid={!!errors.name}
+            style={inputStyle}
+          />
+          {errors.name && <p id="name-error" role="alert" style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.name.message}</p>}
         </div>
         <div>
-          <input {...register("email")} placeholder="Email" type="email" style={inputStyle} />
-          {errors.email && <p style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.email.message}</p>}
+          <input
+            {...register("email")}
+            placeholder="Email"
+            type="email"
+            aria-label="Your email address"
+            aria-describedby={errors.email ? "email-error" : undefined}
+            aria-invalid={!!errors.email}
+            style={inputStyle}
+          />
+          {errors.email && <p id="email-error" role="alert" style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.email.message}</p>}
         </div>
       </div>
 
       {/* Company */}
-      <input {...register("company")} placeholder="Company (optional)" style={inputStyle} />
+      <input
+        {...register("company")}
+        placeholder="Company (optional)"
+        aria-label="Company name (optional)"
+        style={inputStyle}
+      />
 
       {/* Message */}
       <div>
         <textarea
           {...register("message")}
           placeholder="Tell us about your project..."
+          aria-label="Project details"
+          aria-describedby={errors.message ? "message-error" : undefined}
+          aria-invalid={!!errors.message}
           rows={5}
           style={{ ...inputStyle, resize: "vertical", lineHeight: 1.6 }}
         />
-        {errors.message && <p style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.message.message}</p>}
+        {errors.message && <p id="message-error" role="alert" style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.message.message}</p>}
+      </div>
+
+      {/* Consent */}
+      <div>
+        <label style={{ display: "flex", gap: 12, alignItems: "flex-start", cursor: "pointer" }}>
+          <input
+            {...register("consent")}
+            type="checkbox"
+            style={{ marginTop: 3, flexShrink: 0, accentColor: "var(--color-accent, #6366f1)", width: 16, height: 16, cursor: "pointer" }}
+          />
+          <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.6 }}>
+            I agree to BoldPiq&apos;s{" "}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-accent, #6366f1)", textDecoration: "underline" }}>Privacy Policy</a>
+            {" "}and consent to my information being processed for the purposes of responding to my enquiry, including by automated systems and AI-assisted tools. I understand I may be contacted by email, SMS, or phone.
+          </span>
+        </label>
+        {errors.consent && <p style={{ color: "#f43f5e", fontSize: 12, marginTop: 4 }}>{errors.consent.message}</p>}
       </div>
 
       {/* Submit */}
