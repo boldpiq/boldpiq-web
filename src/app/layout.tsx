@@ -223,23 +223,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className={`${geist.variable} antialiased`}>
-        <a
-          href="#main-content"
-          style={{
-            position: "absolute",
-            left: "-9999px",
-            top: "auto",
-            width: 1,
-            height: 1,
-            overflow: "hidden",
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.cssText = "position:fixed;top:16px;left:16px;width:auto;height:auto;overflow:visible;z-index:9999;padding:8px 16px;background:#fff;color:#000;fontWeight:600;borderRadius:8px;boxShadow:0 2px 8px rgba(0,0,0,0.3);textDecoration:none;"
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.cssText = "position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
-          }}
-        >
+        <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
         <NonceProvider nonce={nonce}>
