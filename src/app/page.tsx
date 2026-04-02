@@ -322,7 +322,7 @@ export default function Home() {
             style={{ gap: 40, marginTop: 64, flexWrap: "wrap" }}
           >
             <p style={{ fontSize: "clamp(15px, 1.4vw, 20px)", color: MUTED, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-              High-performance websites that attract, convert, and retain — engineered for businesses that refuse to blend in.
+              Strategically crafted websites designed to support growth — built for businesses that refuse to blend in. Results vary based on industry, market conditions, and client execution.
             </p>
             <div className="hero-cta-wrap" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <motion.a href="/contact" whileHover={{ scale: 1.04, background: "#D4601F" }} whileTap={{ scale: 0.97 }} style={{ padding: "15px 36px", background: ACCENT, color: "#fff", borderRadius: 100, fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em", display: "inline-block" }}>Get Started</motion.a>
@@ -348,7 +348,7 @@ export default function Home() {
           style={{ borderRadius: 20, overflow: "hidden", border: `1px solid ${BORDER}` }}
         >
           {[
-            { stat: 3.2, suffix: "×", label: "Average conversion rate lift across client sites" },
+            { stat: 3.2, suffix: "×", label: "Average conversion rate improvement across client projects — results vary by industry and execution" },
             { stat: 94, suffix: "%", label: "Client retention rate — we keep the clients we earn" },
             { stat: 6, suffix: " wks", label: "Average time from brief to live website" },
           ].map(({ stat, suffix, label }, i) => (
@@ -391,13 +391,13 @@ export default function Home() {
               <Eyebrow label="Services" />
               <h2 style={{ fontSize: "clamp(36px, 5vw, 72px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.92 }}>What We<br /><span style={{ color: ACCENT }}>Build.</span></h2>
             </div>
-            <p style={{ color: MUTED, maxWidth: 360, lineHeight: 1.7, fontSize: 16 }}>Every engagement is designed to move the needle — not just look good on a screen.</p>
+            <p style={{ color: MUTED, maxWidth: 360, lineHeight: 1.7, fontSize: 16 }}>Every engagement is designed with your growth goals in mind — not just a deliverable to tick off a list.</p>
           </div>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 20 }}>
           {[
             { number: "01", title: "Web Design", description: "Award-worthy designs that stop the scroll, earn the click, and reflect the premium nature of your brand.", tags: ["UI/UX", "Figma", "Motion Design", "Responsive"] },
-            { number: "02", title: "Web Development", description: "Fast, secure, scalable Next.js websites — optimised for Core Web Vitals, AI search, and conversion from day one.", tags: ["Next.js", "TypeScript", "Vercel", "Sanity CMS"] },
+            { number: "02", title: "Web Development", description: "Fast, secure, scalable Next.js websites — optimised for Core Web Vitals and AI search from day one.", tags: ["Next.js", "TypeScript", "Vercel", "Sanity CMS"] },
             { number: "03", title: "Brand Identity", description: "Visual systems that command attention and build instant trust — logo, typography, colour, and full brand guidelines.", tags: ["Logo", "Typography", "Colour System", "Guidelines"] },
           ].map((s, i) => (
             <ScrollReveal key={s.title} effect="fade-up" delay={i * 0.1}><ServiceCard {...s} /></ScrollReveal>
@@ -421,8 +421,8 @@ export default function Home() {
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 20 }}>
           {[
-            { tag: "Web Design · Development", title: "Premium brand with a site that converts cold traffic", outcome: "2.8× increase in qualified leads within 60 days", gradient: "linear-gradient(135deg, #1a1f35 0%, #0d1117 100%)" },
-            { tag: "Brand Identity · Web", title: "Full rebrand and launch for a scaling service business", outcome: "94% of new leads now arrive through the website", gradient: `linear-gradient(135deg, rgba(196,84,26,0.22) 0%, #0d1117 100%)` },
+            { tag: "Web Design · Development", title: "Premium brand with a site designed to support qualified lead generation", outcome: "Noticeable improvement in qualified enquiry quality after launch", gradient: "linear-gradient(135deg, #1a1f35 0%, #0d1117 100%)" },
+            { tag: "Brand Identity · Web", title: "Full rebrand and launch for a scaling service business", outcome: "Website became primary channel for inbound enquiries post-launch", gradient: `linear-gradient(135deg, rgba(196,84,26,0.22) 0%, #0d1117 100%)` },
           ].map((c, i) => (
             <ScrollReveal key={c.title} effect="fade-up" delay={i * 0.1}><CaseCard {...c} /></ScrollReveal>
           ))}

@@ -321,7 +321,7 @@ export function Navigation({
                   <Image src="/logo.svg" alt="BoldPiq" width={54} height={80} style={{ height: 80, width: "auto" }} />
                 </Link>
                 <p style={{ color: MUTED, fontSize: 12, lineHeight: 1.6, maxWidth: 260 }}>
-                  High-performance websites that attract, convert, and retain.
+                  Strategically crafted websites designed to support growth.
                 </p>
               </div>
 

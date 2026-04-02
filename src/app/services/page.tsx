@@ -35,7 +35,7 @@ const services = [
     description: "We design websites that stop your audience mid-scroll and make your brand feel undeniably premium. Every design is purpose-built around your audience, goals, and the action you need them to take.",
     deliverables: ["Full homepage design in Figma", "Mobile-first responsive layouts", "Motion & interaction design", "Component design system", "Design sign-off before any code"],
     tags: ["UI/UX", "Figma", "Motion Design", "Responsive", "Design Systems"],
-    outcome: "Brands that look like they charge more — because they do.",
+    outcome: "Brands designed to signal premium positioning to your ideal clients.",
   },
   {
     number: "02",
@@ -44,7 +44,7 @@ const services = [
     description: "We build in Next.js — the same stack used by the world's fastest websites. Your site loads fast, and is connected to your GHL CRM from day one.",
     deliverables: ["Next.js + TypeScript codebase", "Sanity CMS integration", "GHL CRM form connections", "Core Web Vitals optimised", "GEO-optimised for AI search (ChatGPT, Perplexity)"],
     tags: ["Next.js", "TypeScript", "Vercel", "Sanity CMS", "GHL", "GEO"],
-    outcome: "Sites that rank, load fast, and work on every device.",
+    outcome: "Sites built to support ranking potential, load fast, and work on every device.",
   },
   {
     number: "03",
@@ -53,7 +53,7 @@ const services = [
     description: "Before anyone reads your headline, they've already judged your brand. We build visual identities that signal quality instantly — logo, typography, colour palette, and full brand guidelines your team can actually use.",
     deliverables: ["Logo design (primary + lockups)", "Typography system", "Colour palette with usage rules", "Brand guidelines PDF", "Social media & digital asset templates"],
     tags: ["Logo Design", "Typography", "Colour System", "Brand Guidelines", "Digital Assets"],
-    outcome: "A brand that attracts premium clients without saying a word.",
+    outcome: "A brand designed to attract and signal quality to your ideal clients.",
   },
 ]
 
@@ -90,7 +90,7 @@ export default function ServicesPage() {
               What We<br /><span style={{ color: ACCENT }}>Build.</span>
             </h1>
             <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
-              Three core services. Every one designed to produce measurable growth — not just a deliverable to tick off a list.
+              Three core services. Every one designed to support measurable growth strategies — not just a deliverable to tick off a list.
             </p>
           </ScrollReveal>
         </section>

@@ -66,7 +66,7 @@ export function Footer() {
               <Image src="/logo.svg" alt="BoldPiq" width={81} height={120} style={{ height: 120, width: "auto" }} />
             </Link>
             <p style={{ color: MUTED, fontSize: 13, lineHeight: 1.65, maxWidth: 280 }}>
-              High-performance websites that attract, convert, and retain.
+              Strategically crafted websites designed to support growth.
             </p>
           </div>
 

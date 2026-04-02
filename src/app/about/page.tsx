@@ -99,10 +99,10 @@ export default function AboutPage() {
                 BoldPiq was founded because the standard was too low. Too many businesses were being handed websites that looked decent in a browser preview but did nothing for their growth — slow, generic, forgotten by Google the week after launch.
               </p>
               <p style={{ color: MUTED, fontSize: 17, lineHeight: 1.75 }}>
-                We started with a simple conviction: a website should be a business asset, not a business expense. Every element should justify its place by contributing to the outcome — more leads, more trust, more revenue.
+                We started with a simple conviction: a website should be a business asset, not a business expense. Every element should justify its place by being designed to support the outcome — more leads, more trust, more visibility.
               </p>
               <p style={{ color: MUTED, fontSize: 17, lineHeight: 1.75 }}>
-                That conviction shapes everything — how we design, how we write code, how we measure success, and how we talk to clients. Bold work. Honest process. Real results.
+                That conviction shapes everything — how we design, how we write code, how we measure success, and how we talk to clients. Bold work. Honest process. Genuine effort on every project.
               </p>
             </div>
           </ScrollReveal>
@@ -113,7 +113,7 @@ export default function AboutPage() {
       <div style={{ borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
         <div className="grid grid-cols-2 md:grid-cols-4" style={{ maxWidth: 1400, margin: "0 auto" }}>
           {[
-            { stat: "3.2×", label: "Average conversion lift" },
+            { stat: "3.2×", label: "Average conversion improvement (results vary)" },
             { stat: "94%", label: "Client retention rate" },
             { stat: "6 wks", label: "Average delivery time" },
             { stat: "100%", label: "Ownership. Always." },

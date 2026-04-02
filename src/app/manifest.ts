@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Boldpiq — Web Design & Development",
     short_name: "Boldpiq",
-    description: "High-performance websites and graphics that attract, convert, and retain.",
+    description: "Strategically crafted websites and graphics designed to support growth.",
     start_url: "/",
     display: "standalone",
     background_color: "#0B0F1C",

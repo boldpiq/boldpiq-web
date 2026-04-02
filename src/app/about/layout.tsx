@@ -4,7 +4,7 @@ const OG_IMAGE = "https://assets.cdn.filesafe.space/2YVSGppZ3t1nNSl74HPu/media/6
 
 export const metadata: Metadata = {
   title: "About Boldpiq — The Team Behind Your Digital Growth",
-  description: "Meet the Boldpiq team. We're a South African web design and branding agency passionate about crafting stunning digital experiences that captivate audiences and drive real business results.",
+  description: "Meet the Boldpiq team. We're a South African web design and branding agency passionate about crafting stunning digital experiences designed to support real business growth.",
   keywords: [
     "about Boldpiq", "Boldpiq team", "South African web design agency",
     "web design studio Cape Town", "creative agency South Africa",

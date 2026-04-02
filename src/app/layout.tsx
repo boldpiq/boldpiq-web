@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
     template: "%s | BoldPiq",
   },
-  description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
+  description: "BoldPiq builds high-performance websites and AI systems designed to support growth for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
   keywords: [
     "boldpiq", "web design", "graphic design", "branding", "e-commerce development",
     "responsive design", "digital experiences", "website development", "custom web design",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "BoldPiq",
     title: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
-    description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
+    description: "BoldPiq builds high-performance websites and AI systems designed to support growth for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
     images: [
       {
         url: OG_IMAGE,
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BoldPiq — Web Design & AI Solutions Agency | South Africa",
-    description: "BoldPiq builds high-performance websites and AI systems that generate revenue for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
+    description: "BoldPiq builds high-performance websites and AI systems designed to support growth for scaling service businesses in South Africa. Next.js, GEO-optimised, Built to Grow.",
     images: [OG_IMAGE],
     creator: "@boldpiq",
   },
