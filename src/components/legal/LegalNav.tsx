@@ -8,6 +8,7 @@ const links = [
   { label: "Refund Policy", href: "/refund" },
   { label: "PAIA Manual", href: "/paia" },
   { label: "Data Processing Agreement", href: "/dpa" },
+  { label: "Disclaimers", href: "/disclaimers" },
 ]
 
 const ACCENT = "#C4541A"
