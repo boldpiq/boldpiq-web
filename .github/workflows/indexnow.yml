@@ -1,0 +1,16 @@
+name: IndexNow — Notify Bing on Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ping:
+    name: Submit URLs to Bing IndexNow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping IndexNow
+        run: |
+          curl -sf -X POST https://www.boldpiq.com/api/indexnow \
+            -H "Authorization: Bearer ${{ secrets.INDEXNOW_SECRET }}"

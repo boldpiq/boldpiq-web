@@ -38,6 +38,10 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "CCBot", allow: "/", disallow },
       // ByteDance / TikTok AI
       { userAgent: "Bytespider", allow: "/", disallow },
+      // Microsoft Bing (Bing Copilot + ChatGPT web search via Bing)
+      { userAgent: "bingbot", allow: "/", disallow },
+      // Amazon / Alexa AI
+      { userAgent: "Amazonbot", allow: "/", disallow },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
     host: BASE_URL,

@@ -32,6 +32,12 @@
       "source": "/home",
       "destination": "https://www.boldpiq.com",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "boldpiq.com" }],
+      "destination": "https://www.boldpiq.com/:path*",
+      "permanent": true
     }
   ],
   "rewrites": []
