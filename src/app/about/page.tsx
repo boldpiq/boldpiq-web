@@ -73,7 +73,7 @@ export default function AboutPage() {
           <ScrollReveal effect="fade-up">
             <Eyebrow label="About" />
             <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-              We build<br /><span style={{ color: ACCENT }}>growth engines.</span>
+              South Africa<br /><span style={{ color: ACCENT }}>Web Design Agency.</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal effect="fade-up" delay={0.1}>
@@ -85,7 +85,7 @@ export default function AboutPage() {
       </div>
 
       {/* STORY */}
-      <section style={{ padding: "0 clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(60px, 8vw, 100px) clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: "clamp(48px, 6vw, 120px)", alignItems: "start" }}>
           <ScrollReveal effect="fade-up">
             <Eyebrow label="Our Story" />
@@ -96,7 +96,7 @@ export default function AboutPage() {
           <ScrollReveal effect="fade-up" delay={0.1}>
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               <p style={{ color: MUTED, fontSize: 17, lineHeight: 1.75 }}>
-                BoldPiq was founded because the standard was too low. Too many businesses were being handed websites that looked decent in a browser preview but did nothing for their growth — slow, generic, forgotten by Google the week after launch.
+                BoldPiq was founded by Monique, a South African web designer and Next.js developer, because the standard was too low. Too many businesses were being handed websites that looked decent in a browser preview but did nothing for their growth — slow, generic, forgotten by search engines the week after launch.
               </p>
               <p style={{ color: MUTED, fontSize: 17, lineHeight: 1.75 }}>
                 We started with a simple conviction: a website should be a business asset, not a business expense. Every element should justify its place by being designed to support the outcome — more leads, more trust, more visibility.
