@@ -440,6 +440,62 @@ export default function WhatToExpectPage() {
         </div>
       </section>
 
+      {/* ── CTA ── */}
+      <section style={{ padding: "0 clamp(20px, 4vw, 48px) 120px", maxWidth: 1200, margin: "0 auto" }}>
+        <ScrollReveal effect="fade-up">
+          <div style={{
+            textAlign: "center",
+            padding: "64px clamp(24px, 5vw, 80px)",
+            border: `1px solid ${BORDER}`,
+            borderRadius: 24,
+            background: SURFACE,
+            position: "relative",
+            overflow: "hidden",
+          }}>
+            <div style={{
+              position: "absolute", inset: 0,
+              background: `radial-gradient(ellipse 60% 50% at 50% 100%, rgba(196,84,26,0.12) 0%, transparent 70%)`,
+              pointerEvents: "none",
+            }} />
+            <div style={{
+              position: "absolute", bottom: 0, left: 0, right: 0,
+              height: 2,
+              background: `linear-gradient(90deg, transparent, ${ACCENT}, transparent)`,
+              borderRadius: "0 0 24px 24px",
+            }} />
+
+            <motion.div
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              style={{ fontSize: 36, marginBottom: 16 }}
+            >
+              🚀
+            </motion.div>
+            <h2 style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 32 }}>
+              Ready to get started?
+            </h2>
+            <motion.a
+              href="/booking"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 10,
+                padding: "14px 32px", borderRadius: 100,
+                background: ACCENT, color: "#fff",
+                fontSize: 15, fontWeight: 700, letterSpacing: "0.02em",
+                textDecoration: "none",
+                boxShadow: `0 0 40px rgba(196,84,26,0.35)`,
+              }}
+            >
+              Book a Discovery Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.a>
+          </div>
+        </ScrollReveal>
+      </section>
+
       <Footer />
     </main>
   )
