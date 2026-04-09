@@ -10,6 +10,10 @@
 - [Book a 45-Min Strategy Session](https://www.boldpiq.com/contact45min): Extended 45-minute session for in-depth project scoping, existing-site audits, and digital strategy planning.
 - [About Boldpiq](https://www.boldpiq.com/about): Agency background, team, design philosophy, and approach to building high-converting web experiences.
 
+## Process
+
+- [What to Expect](https://www.boldpiq.com/what-to-expect): Step-by-step overview of how BoldPiq delivers projects — Discovery Call, Design & Build, Review & Refine, and Launch & Handover. Typical timeline 3 weeks.
+
 ## Portfolio
 
 - [Work & Case Studies](https://www.boldpiq.com/work): Portfolio of completed client projects across hospitality, professional services, retail, and non-profit sectors.
