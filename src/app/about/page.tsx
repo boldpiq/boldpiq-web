@@ -85,7 +85,7 @@ export default function AboutPage() {
       </div>
 
       {/* STORY */}
-      <section style={{ padding: "clamp(60px, 8vw, 100px) clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(100px, 14vw, 180px) clamp(20px, 4vw, 48px) clamp(60px, 8vw, 100px)", maxWidth: 1400, margin: "0 auto" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: "clamp(48px, 6vw, 120px)", alignItems: "start" }}>
           <ScrollReveal effect="fade-up">
             <Eyebrow label="Our Story" />
