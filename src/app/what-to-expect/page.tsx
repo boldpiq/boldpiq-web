@@ -474,27 +474,6 @@ export default function WhatToExpectPage() {
             <h2 style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 12 }}>
               Ready to get started?
             </h2>
-            <p style={{ fontSize: "clamp(14px, 1.2vw, 17px)", color: MUTED, maxWidth: 440, margin: "0 auto 36px", lineHeight: 1.65 }}>
-              Book your discovery call and let&apos;s map out what we can build together.
-            </p>
-            <motion.a
-              href="/booking"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 10,
-                padding: "14px 32px", borderRadius: 100,
-                background: ACCENT, color: "#fff",
-                fontSize: 15, fontWeight: 700, letterSpacing: "0.02em",
-                textDecoration: "none",
-                boxShadow: `0 0 40px rgba(196,84,26,0.35)`,
-              }}
-            >
-              Book a Discovery Call
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </motion.a>
           </div>
         </ScrollReveal>
       </section>
