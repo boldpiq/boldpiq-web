@@ -440,44 +440,6 @@ export default function WhatToExpectPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ padding: "0 clamp(20px, 4vw, 48px) 120px", maxWidth: 1200, margin: "0 auto" }}>
-        <ScrollReveal effect="fade-up">
-          <div style={{
-            textAlign: "center",
-            padding: "64px clamp(24px, 5vw, 80px)",
-            border: `1px solid ${BORDER}`,
-            borderRadius: 24,
-            background: SURFACE,
-            position: "relative",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              position: "absolute", inset: 0,
-              background: `radial-gradient(ellipse 60% 50% at 50% 100%, rgba(196,84,26,0.12) 0%, transparent 70%)`,
-              pointerEvents: "none",
-            }} />
-            <div style={{
-              position: "absolute", bottom: 0, left: 0, right: 0,
-              height: 2,
-              background: `linear-gradient(90deg, transparent, ${ACCENT}, transparent)`,
-              borderRadius: "0 0 24px 24px",
-            }} />
-
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              style={{ fontSize: 36, marginBottom: 16 }}
-            >
-              🚀
-            </motion.div>
-            <h2 style={{ fontSize: "clamp(24px, 4vw, 48px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 12 }}>
-              Ready to get started?
-            </h2>
-          </div>
-        </ScrollReveal>
-      </section>
-
       <Footer />
     </main>
   )
