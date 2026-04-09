@@ -132,7 +132,7 @@ export default function WorkPage() {
           <ScrollReveal effect="fade-up">
             <Eyebrow label="Our Work" />
             <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-              Proof in<br /><span style={{ color: ACCENT }}>Results.</span>
+              Web Design<br /><span style={{ color: ACCENT }}>Portfolio.</span>
             </h1>
             <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
               Real clients. Real outcomes. Every project measured against one thing — does it grow the business?
@@ -362,7 +362,6 @@ function VideoCard({ videoId, thumb }: { videoId: string; thumb: string }) {
             fill
             style={{ objectFit: "cover", transition: "transform 0.4s ease", transform: hovered ? "scale(1.03)" : "scale(1)" }}
             sizes="(max-width: 768px) 100vw, 50vw"
-            unoptimized
           />
           <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <motion.div

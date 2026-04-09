@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.leadconnectorhq.com" },
       { protocol: "https", hostname: "assets.cdn.filesafe.space" },
       { protocol: "https", hostname: "images.squarespace-cdn.com" },
+      { protocol: "https", hostname: "img.youtube.com" },
     ],
   },
 
