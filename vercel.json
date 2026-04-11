@@ -43,8 +43,7 @@
       "source": "/:path*",
       "has": [{ "type": "host", "value": "boldpiq.com" }],
       "destination": "https://www.boldpiq.com/:path*",
-      "permanent": true,
-      "headers": [{ "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }]
+      "permanent": true
     }
   ],
   "rewrites": []
