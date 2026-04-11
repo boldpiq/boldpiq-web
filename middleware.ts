@@ -25,10 +25,10 @@ export function middleware(request: NextRequest) {
     // they are kept only as legacy fallbacks for browsers without strict-dynamic support.
     // 'https:' removed: with strict-dynamic it is redundant and flags HIGH on audit tools.
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
-    // 'nonce-${nonce}' allows <style nonce="..."> tags — modern browsers ignore 'unsafe-inline'
-    // when a nonce is present on <style> elements. 'unsafe-inline' is kept as a fallback for
-    // legacy browsers and is required for JSX style={} attributes which cannot carry nonces.
-    `style-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://*.leadconnectorhq.com https://*.gohighlevel.com https://fonts.bunny.net https://www.gstatic.com`,
+    // Nonces are NOT used in style-src: when a nonce is present, modern browsers ignore
+    // 'unsafe-inline', which blocks Next.js inline <style> tags (fonts, critical CSS).
+    // 'unsafe-inline' + 'self' is sufficient for styles; nonces are only needed for script-src.
+    `style-src 'self' 'unsafe-inline' https://*.leadconnectorhq.com https://*.gohighlevel.com https://fonts.bunny.net https://www.gstatic.com`,
     "img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://res.cloudinary.com https://*.leadconnectorhq.com https://assets.cdn.filesafe.space https://images.squarespace-cdn.com https://www.google.com https://www.gstatic.com https://lh3.googleusercontent.com",
     "font-src 'self' data: https://*.leadconnectorhq.com https://fonts.bunny.net https://www.gstatic.com",
     "connect-src 'self' https://services.leadconnectorhq.com https://*.leadconnectorhq.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://js.hs-scripts.com wss://challenges.cloudflare.com",
