@@ -2,7 +2,21 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+const HSTS = 'max-age=63072000; includeSubDomains; preload'
+
 export function middleware(request: NextRequest) {
+  // Redirect bare domain → www with HSTS on the redirect response itself.
+  // vercel.json redirects are processed at infrastructure level and don't carry
+  // custom headers, so this must be handled here where we control the response.
+  const host = request.headers.get('host') ?? ''
+  if (host === 'boldpiq.com' || host === 'boldpiq.com:443') {
+    const url = request.nextUrl.clone()
+    url.host = 'www.boldpiq.com'
+    const redirect = NextResponse.redirect(url, 308)
+    redirect.headers.set('strict-transport-security', HSTS)
+    return redirect
+  }
+
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
 
   const csp = [
@@ -36,9 +50,8 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   })
+  response.headers.set('strict-transport-security', HSTS)
   response.headers.set('content-security-policy', csp)
-  // Explicitly disable the legacy IE XSS auditor — setting to 0 is the current recommendation
-  // as the auditor itself had exploitable behaviour in older browsers.
   response.headers.set('x-xss-protection', '0')
 
   return response
