@@ -322,7 +322,7 @@ export default function Home() {
             style={{ gap: 40, marginTop: 64, flexWrap: "wrap" }}
           >
             <p style={{ fontSize: "clamp(15px, 1.4vw, 20px)", color: MUTED, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-              Strategically crafted websites designed to support growth — built for businesses that refuse to blend in. Results vary based on industry, market conditions, and client execution.
+              High-performance web design and development for scaling businesses in South Africa. Strategically crafted to generate leads and drive real growth. Results vary based on industry, market conditions, and client execution.
             </p>
             <div className="hero-cta-wrap" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <motion.a href="/contact" whileHover={{ scale: 1.04, background: "#D4601F" }} whileTap={{ scale: 0.97 }} style={{ padding: "15px 36px", background: ACCENT, color: "#fff", borderRadius: 100, fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em", display: "inline-block" }}>Get Started</motion.a>

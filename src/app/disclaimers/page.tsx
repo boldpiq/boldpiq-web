@@ -25,7 +25,7 @@ export default function DisclaimersPage() {
             Legal<br /><span style={{ color: ACCENT }}>Disclaimers</span>
           </h1>
           <p style={{ color: MUTED, fontSize: 13, marginBottom: 8, opacity: 0.6 }}>www.boldpiq.com/disclaimers</p>
-          <p style={{ color: MUTED, fontSize: 14, marginBottom: 16 }}>Effective Date: 01 April 2026 · Last Updated: 01 April 2026</p>
+          <p style={{ color: MUTED, fontSize: 14, marginBottom: 16 }}>Effective Date: 01 April 2026 · Last Updated: 04 April 2026</p>
           <p style={{ color: MUTED, fontSize: 14, marginBottom: 48, lineHeight: 1.65 }}>
             These disclaimers apply to all content, services, and communications provided by Cinnimon t/a BoldPiq (Reg. 2015/193038/07). By accessing our website or engaging our services, you acknowledge and accept these disclaimers.
           </p>
@@ -78,27 +78,49 @@ Clients should review all deliverables and confirm accuracy before publication o
 Clients are encouraged to review the terms and privacy policies of all third-party tools used in their projects.`,
             },
             {
-              title: "7. Intellectual Property",
+              title: "7. BoldPiq Technology Stack",
+              body: `The website will be built using BoldPiq's proprietary baseline stack (the "Stack"), as documented at www.boldpiq.com and in the applicable project specification. The Stack includes specific security configurations, AI crawler access protocols, IndexNow automation, server-side rendering setup, performance optimisations, and related technical best practices as implemented at the Go-Live date.
+
+BoldPiq continually refines its Stack across new and existing projects. The version deployed for a specific client reflects the standards current at the time of that project's Go-Live. BoldPiq makes no warranty that the Stack deployed in any project will remain compliant with future third-party platform requirements, evolving security standards, or updated AI search protocols after the Go-Live date, except under a separate Maintenance & Support Agreement.`,
+            },
+            {
+              title: "8. Post-Launch Maintenance and Liability",
+              body: `After the official Go-Live / handover date, BoldPiq is not automatically responsible for applying updates to third-party services, frameworks (including but not limited to Next.js, Sanity CMS, and Vercel), security patches, or evolving industry best practices, unless a separate Maintenance & Support Agreement is in place.
+
+BoldPiq will not be liable for any issues, vulnerabilities, performance degradation, or loss arising from:
+
+· Missed updates to third-party frameworks or services
+· Changes in external platform behaviour, APIs, or policies
+· New security threats or exploits emerging after Go-Live
+· Evolution of SEO, GEO, or AI search standards after Go-Live
+· Any combination of the above
+
+This limitation applies except where such issues result directly from BoldPiq's gross negligence or willful misconduct occurring before the Go-Live date.
+
+Any ongoing updates, monitoring, security hardening, or performance optimisation are provided exclusively under a separate paid Maintenance Plan. Clients are encouraged to enquire about BoldPiq's Maintenance & Support packages at support@boldpiq.com.`,
+            },
+            {
+              title: "9. Intellectual Property",
               body: `All content on this website — including but not limited to text, graphics, logos, images, and code — is the property of BoldPiq or its licensors, unless otherwise stated. Unauthorised reproduction, distribution, or commercial use of any content without prior written permission from BoldPiq is strictly prohibited.
 
 Client-owned deliverables are subject to the intellectual property terms outlined in the applicable Statement of Work or Terms of Service.`,
             },
             {
-              title: "8. Limitation of Liability",
-              body: `To the fullest extent permitted by South African law (including the Consumer Protection Act 68 of 2008 and the Electronic Communications and Transactions Act 25 of 2002), BoldPiq's total liability to any client or website visitor shall not exceed the fees paid by that client in the three (3) months immediately preceding the event giving rise to the claim.
+              title: "10. Limitation of Liability",
+              body: `To the fullest extent permitted by South African law (including the Consumer Protection Act 68 of 2008 and the Electronic Communications and Transactions Act 25 of 2002), BoldPiq's total cumulative liability to any client or website visitor under any Agreement shall not exceed the total fees paid by that client in the twelve (12) months immediately preceding the event giving rise to the claim. This limitation applies regardless of the form of action, whether in contract, delict, or otherwise.
 
-BoldPiq shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, loss of data, or loss of goodwill.`,
+BoldPiq shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, loss of revenue, loss of data, loss of goodwill, or business interruption, even if advised of the possibility of such damages.`,
             },
             {
-              title: "9. Jurisdiction",
+              title: "11. Jurisdiction",
               body: `These disclaimers are governed by the laws of the Republic of South Africa. Any disputes arising from or relating to these disclaimers shall be subject to the jurisdiction of the courts of South Africa, without regard to conflict of law principles.`,
             },
             {
-              title: "10. Changes to This Page",
+              title: "12. Changes to This Page",
               body: `BoldPiq reserves the right to update or amend these disclaimers at any time without prior notice. Continued use of the website or our services following any changes constitutes acceptance of the revised disclaimers. The "Last Updated" date at the top of this page reflects the most recent revision.`,
             },
             {
-              title: "11. Contact",
+              title: "13. Contact",
               body: `If you have questions about these disclaimers, please contact us:
 
 BoldPiq (Cinnimon t/a BoldPiq, Reg. 2015/193038/07)

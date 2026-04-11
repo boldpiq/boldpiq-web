@@ -65,11 +65,22 @@ const faqs = [
   { q: "Can you connect my website to my existing tools?", a: "Yes. We integrate with GHL CRM, Calendly, booking software, and most major tools. Ask us about your specific stack." },
 ]
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+}
+
 export default function ServicesPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
     <main style={{ background: BG, color: "#fff", minHeight: "100vh" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* HERO */}
       <div style={{ position: "relative", overflow: "hidden" }}>
@@ -87,7 +98,7 @@ export default function ServicesPage() {
           <ScrollReveal effect="fade-up">
             <Eyebrow label="Services" />
             <h1 style={{ fontSize: "clamp(48px, 8vw, 120px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 0.88, marginBottom: 40 }}>
-              What We<br /><span style={{ color: ACCENT }}>Build.</span>
+              Web Design &amp;<br /><span style={{ color: ACCENT }}>Development Services.</span>
             </h1>
             <p style={{ fontSize: "clamp(16px, 1.4vw, 20px)", color: MUTED, maxWidth: 560, lineHeight: 1.65 }}>
               Three core services. Every one designed to support measurable growth strategies — not just a deliverable to tick off a list.
