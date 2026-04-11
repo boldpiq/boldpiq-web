@@ -11,7 +11,10 @@ export function middleware(request: NextRequest) {
     // they are kept only as legacy fallbacks for browsers without strict-dynamic support.
     // 'https:' removed: with strict-dynamic it is redundant and flags HIGH on audit tools.
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
-    "style-src 'self' 'unsafe-inline' https://*.leadconnectorhq.com https://*.gohighlevel.com https://fonts.bunny.net https://www.gstatic.com",
+    // 'nonce-${nonce}' allows <style nonce="..."> tags — modern browsers ignore 'unsafe-inline'
+    // when a nonce is present on <style> elements. 'unsafe-inline' is kept as a fallback for
+    // legacy browsers and is required for JSX style={} attributes which cannot carry nonces.
+    `style-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://*.leadconnectorhq.com https://*.gohighlevel.com https://fonts.bunny.net https://www.gstatic.com`,
     "img-src 'self' data: blob: https://cdn.sanity.io https://images.unsplash.com https://res.cloudinary.com https://*.leadconnectorhq.com https://assets.cdn.filesafe.space https://images.squarespace-cdn.com https://www.google.com https://www.gstatic.com https://lh3.googleusercontent.com",
     "font-src 'self' data: https://*.leadconnectorhq.com https://fonts.bunny.net https://www.gstatic.com",
     "connect-src 'self' https://services.leadconnectorhq.com https://*.leadconnectorhq.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://js.hs-scripts.com wss://challenges.cloudflare.com",
@@ -34,6 +37,9 @@ export function middleware(request: NextRequest) {
     request: { headers: requestHeaders },
   })
   response.headers.set('content-security-policy', csp)
+  // Explicitly disable the legacy IE XSS auditor — setting to 0 is the current recommendation
+  // as the auditor itself had exploitable behaviour in older browsers.
+  response.headers.set('x-xss-protection', '0')
 
   return response
 }

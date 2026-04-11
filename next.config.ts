@@ -44,6 +44,7 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), interest-cohort=(), browsing-topics=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+          { key: "X-XSS-Protection", value: "0" },
           // Prevents cross-origin window access (Spectre mitigation). 'same-origin-allow-popups'
           // used instead of 'same-origin' to preserve GHL chat popup window functionality.
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
