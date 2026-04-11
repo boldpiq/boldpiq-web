@@ -122,8 +122,8 @@ export function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <a href="mailto:support@boldpiq.com" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>support@boldpiq.com</a>
               <a href="mailto:team@boldpiq.com" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>team@boldpiq.com</a>
-              <a href="tel:+27218151634" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>+27 21 815 1634</a>
-              <a href="https://api.whatsapp.com/send/?phone=27218151634&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>WhatsApp</a>
+              <a href="tel:+27792115659" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>+27 79 211 5659</a>
+              <a href="https://api.whatsapp.com/send/?phone=27792115659&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="footer-social-link" style={{ color: MUTED, fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}>WhatsApp</a>
             </div>
           </div>
         </div>
