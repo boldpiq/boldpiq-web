@@ -40,7 +40,7 @@ async function fetchPortalData(token: string): Promise<PortalData | null> {
   try {
     const res = await fetch(
       `${N8N_BASE}/webhook/portal-data?token=${encodeURIComponent(token)}`,
-      { next: { revalidate: 10 } }
+      { cache: 'no-store' }
     )
     if (!res.ok) return null
     return res.json() as Promise<PortalData>
