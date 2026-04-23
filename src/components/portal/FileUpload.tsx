@@ -188,7 +188,14 @@ export function FileUpload({ token, folderUrl }: Props) {
               color: f.ok ? 'rgba(255,255,255,0.75)' : '#ef4444',
             }}
           >
-            <span>{f.ok ? '✓' : '✗'}</span>
+            <span style={{
+              display: 'inline-block',
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: f.ok ? ACCENT : '#ef4444',
+              flexShrink: 0,
+            }} />
             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{f.name}</span>
           </motion.div>
         ))}
