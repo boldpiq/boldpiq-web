@@ -60,15 +60,15 @@ export function StageProgress({ currentStage }: Props) {
               key={s.key}
               title={s.label}
               style={{
-                height: 8,
+                height: active ? 28 : 8,
                 width: active ? 'auto' : 8,
                 minWidth: active ? 'auto' : 8,
                 borderRadius: 999,
                 background: done ? ACCENT : BORDER,
-                padding: active ? '0 10px' : 0,
+                padding: active ? '0 16px' : 0,
                 display: 'flex',
                 alignItems: 'center',
-                fontSize: 10,
+                fontSize: active ? 14 : 10,
                 fontWeight: 600,
                 color: '#fff',
                 whiteSpace: 'nowrap',
