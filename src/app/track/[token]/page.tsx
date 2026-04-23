@@ -75,8 +75,10 @@ export default async function TrackPage(
 
   return (
     <>
-      <main style={{ minHeight: '100vh', paddingTop: 80 }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '40px clamp(20px,4vw,48px) 80px' }}>
+      <main style={{ minHeight: '100vh', paddingTop: 80, position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(ellipse 80% 65% at 76% 36%, rgba(196,84,26,0.38) 0%, transparent 66%)' }} />
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(ellipse 44% 38% at 16% 78%, rgba(196,84,26,0.20) 0%, transparent 62%)' }} />
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '40px clamp(20px,4vw,48px) 80px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
           <div style={{ marginBottom: 40 }}>
