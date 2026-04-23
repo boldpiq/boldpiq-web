@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'motion/react'
 
 const STAGES = [
@@ -65,8 +65,24 @@ export function StageProgress({ currentStage }: Props) {
               const open = hovered || active
 
               return (
+                <React.Fragment key={s.key}>
+                {i > 0 && (
+                  <motion.span
+                    animate={{ opacity: hovered ? 0.35 : 0, scale: hovered ? 1 : 0.5 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    style={{
+                      fontSize: 10,
+                      color: '#fff',
+                      lineHeight: 1,
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                      flexShrink: 0,
+                    }}
+                  >
+                    ›
+                  </motion.span>
+                )}
                 <motion.div
-                  key={s.key}
                   layout
                   animate={{
                     height: open ? 28 : 8,
@@ -111,6 +127,7 @@ export function StageProgress({ currentStage }: Props) {
                     )}
                   </AnimatePresence>
                 </motion.div>
+                </React.Fragment>
               )
             })}
           </motion.div>
