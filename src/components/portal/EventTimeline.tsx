@@ -28,7 +28,7 @@ interface Props { events: PortalEvent[] }
 
 export function EventTimeline({ events }: Props) {
   if (events.length === 0) {
-    return <p style={{ color: MUTED, fontSize: 14 }}>No updates yet.</p>
+    return <p style={{ color: MUTED, fontSize: 16 }}>No updates yet.</p>
   }
 
   return (
@@ -63,15 +63,15 @@ export function EventTimeline({ events }: Props) {
             {ICONS[ev.icon] ?? '·'}
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 2 }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 2 }}>
               {ev.display_label}
             </div>
             {ev.display_message && (
-              <div style={{ fontSize: 13, color: MUTED }}>
+              <div style={{ fontSize: 15, color: MUTED }}>
                 {ev.display_message}
               </div>
             )}
-            <div style={{ fontSize: 11, color: MUTED, marginTop: 4, letterSpacing: '0.05em' }}>
+            <div style={{ fontSize: 13, color: MUTED, marginTop: 4, letterSpacing: '0.05em' }}>
               {new Date(ev.occurred_at).toLocaleDateString('en-ZA', {
                 day: 'numeric',
                 month: 'short',

@@ -84,7 +84,7 @@ export default async function TrackPage(
           <div style={{ marginBottom: 40 }}>
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 8 }}>
               <span style={{ height: 1, width: 24, background: ACCENT, display: 'block', flexShrink: 0 }} />
-              <span style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: MUTED }}>
+              <span style={{ fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: MUTED }}>
                 Project Tracker
               </span>
             </div>
@@ -92,7 +92,7 @@ export default async function TrackPage(
               Hi {firstName} 👋
             </h1>
             {portal.project_type && (
-              <p style={{ color: MUTED, fontSize: 15 }}>{portal.project_type}</p>
+              <p style={{ color: MUTED, fontSize: 17 }}>{portal.project_type}</p>
             )}
           </div>
 
@@ -104,12 +104,12 @@ export default async function TrackPage(
             padding: '24px 28px',
             marginBottom: 16,
           }}>
-            <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
+            <p style={{ fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
               Progress
             </p>
             <StageProgress currentStage={portal.current_stage} />
             {portal.stage_message && (
-              <p style={{ fontSize: 14, color: MUTED, marginTop: 12 }}>{portal.stage_message}</p>
+              <p style={{ fontSize: 16, color: MUTED, marginTop: 12 }}>{portal.stage_message}</p>
             )}
           </div>
 
@@ -121,13 +121,13 @@ export default async function TrackPage(
             padding: '24px 28px',
             marginBottom: 16,
           }}>
-            <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
+            <p style={{ fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
               Actions
             </p>
             {isClientReview ? (
               <ActionButtons token={token} currentStage={portal.current_stage} />
             ) : (
-              <p style={{ fontSize: 14, color: MUTED }}>No actions required at this stage.</p>
+              <p style={{ fontSize: 16, color: MUTED }}>No actions required at this stage.</p>
             )}
           </div>
 
@@ -138,7 +138,7 @@ export default async function TrackPage(
             borderRadius: 16,
             padding: '24px 28px',
           }}>
-            <p style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
+            <p style={{ fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
               Timeline
             </p>
             <EventTimeline events={events} />
