@@ -7,9 +7,9 @@ const ACCENT_HOVER = '#D4601F'
 const MUTED = 'rgba(255,255,255,0.45)'
 const BORDER = 'rgba(255,255,255,0.08)'
 
-interface Props { token: string; currentStage: string; driveFolderUrl?: string | null }
+interface Props { token: string; currentStage: string; driveFolderUrl?: string | null; firstName?: string }
 
-export function ActionButtons({ token, currentStage, driveFolderUrl }: Props) {
+export function ActionButtons({ token, currentStage, driveFolderUrl, firstName }: Props) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
@@ -17,7 +17,7 @@ export function ActionButtons({ token, currentStage, driveFolderUrl }: Props) {
     return (
       <div>
         <p style={{ fontSize: 13, color: MUTED, marginBottom: 16 }}>
-          Your dedicated project folder has been created. All assets, files, and deliverables will be shared here throughout the project.
+          {firstName ? `${firstName}, your` : 'Your'} dedicated project folder has been created. All assets, files, and deliverables will be shared here throughout the project.
         </p>
         {driveFolderUrl ? (
           <a

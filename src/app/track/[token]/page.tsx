@@ -130,7 +130,7 @@ export default async function TrackPage(
               Actions
             </p>
             {hasActions ? (
-              <ActionButtons token={token} currentStage={portal.current_stage} driveFolderUrl={portal.drive_folder_url} />
+              <ActionButtons token={token} currentStage={portal.current_stage} driveFolderUrl={portal.drive_folder_url} firstName={firstName} />
             ) : (
               <p style={{ fontSize: 16, color: MUTED }}>No actions required at this stage.</p>
             )}
