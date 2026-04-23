@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { FileUpload } from './FileUpload'
 
 const ACCENT = '#C4541A'
 const ACCENT_HOVER = '#D4601F'
@@ -65,6 +66,7 @@ export function ActionButtons({ token, currentStage, driveFolderUrl, firstName }
         ) : (
           <p style={{ fontSize: 13, color: MUTED }}>Your folder is being prepared — check back shortly.</p>
         )}
+        {driveFolderUrl && <FileUpload token={token} folderUrl={driveFolderUrl} />}
       </div>
     )
   }
