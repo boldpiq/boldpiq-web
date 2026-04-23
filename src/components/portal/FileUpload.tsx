@@ -28,9 +28,9 @@ export function FileUpload({ token, folderUrl }: Props) {
       })
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) resolve()
-        else reject(new Error(`Drive upload returned ${xhr.status}`))
+        else reject(new Error(`Drive returned ${xhr.status}: ${xhr.responseText.slice(0, 200)}`))
       })
-      xhr.addEventListener('error', () => reject(new Error('Network error')))
+      xhr.addEventListener('error', () => reject(new Error('Network error — check browser console for CORS details')))
       xhr.open('PUT', uploadUrl)
       xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
       // Tell Drive this is the complete file (final chunk), required for files under 256 KB
@@ -62,8 +62,12 @@ export function FileUpload({ token, folderUrl }: Props) {
             folderUrl,
           }),
         })
-        if (!initRes.ok) throw new Error('Could not initialise upload')
+        if (!initRes.ok) {
+          const errBody = await initRes.text().catch(() => '')
+          throw new Error(`Init failed (${initRes.status}): ${errBody.slice(0, 120)}`)
+        }
         const { uploadUrl } = await initRes.json()
+        if (!uploadUrl) throw new Error('No upload URL returned from server')
 
         // Step 2: Upload directly to Google Drive — bypasses Vercel entirely
         await uploadFileDirect(file, uploadUrl)
@@ -78,7 +82,7 @@ export function FileUpload({ token, folderUrl }: Props) {
         results.push({ name: file.name, ok: true })
       } catch (err) {
         results.push({ name: file.name, ok: false })
-        setError('One or more files failed to upload.')
+        setError(err instanceof Error ? err.message : 'Upload failed. Please try again.')
       }
     }
 
