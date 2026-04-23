@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { Footer } from '@/components/layout/Footer'
-import { StageProgress, EventTimeline, ActionButtons } from '@/components/portal'
+import { StageProgress, EventTimeline, ActionButtons, CompletionAnimation } from '@/components/portal'
 
 const N8N_BASE = process.env.N8N_BASE_URL || 'https://n8nservice.boldpiq.com'
 
@@ -72,12 +72,14 @@ export default async function TrackPage(
   const { portal, events } = data
   const firstName = portal.display_name?.split(' ')[0] ?? 'there'
   const isClientReview = portal.current_stage === 'client_qa'
+  const isCompleted = portal.current_stage === 'completed'
 
   return (
     <>
       <main style={{ minHeight: '100vh', paddingTop: 80, position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(ellipse 80% 65% at 76% 36%, rgba(196,84,26,0.38) 0%, transparent 66%)' }} />
         <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(ellipse 44% 38% at 16% 78%, rgba(196,84,26,0.20) 0%, transparent 62%)' }} />
+        {isCompleted && <CompletionAnimation />}
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '40px clamp(20px,4vw,48px) 80px', position: 'relative', zIndex: 1 }}>
 
           {/* Header */}
