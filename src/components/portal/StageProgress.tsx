@@ -28,7 +28,7 @@ const BORDER = 'rgba(255,255,255,0.08)'
 interface Props { currentStage: string }
 
 export function StageProgress({ currentStage }: Props) {
-  const [expanded, setExpanded] = useState(false)
+  const [hovered, setHovered] = useState(false)
   const idx = STAGES.findIndex(s => s.key === currentStage)
   const pct = idx < 0 ? 0 : Math.round((idx / (STAGES.length - 1)) * 100)
 
@@ -51,10 +51,10 @@ export function StageProgress({ currentStage }: Props) {
         />
       </div>
 
-      {/* Stage dots — hover entire row to reveal all labels */}
+      {/* Dots row — hover reveals all labels */}
       <div
-        onMouseEnter={() => setExpanded(true)}
-        onMouseLeave={() => setExpanded(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{ cursor: 'default' }}
       >
         <LayoutGroup>
@@ -62,38 +62,37 @@ export function StageProgress({ currentStage }: Props) {
             {STAGES.map((s, i) => {
               const done = i <= idx
               const active = i === idx
-              const showLabel = expanded || active
-
-              const bg = active
-                ? ACCENT
-                : done
-                  ? expanded ? 'rgba(196,84,26,0.55)' : ACCENT
-                  : expanded ? 'rgba(255,255,255,0.1)' : BORDER
+              const open = hovered || active
 
               return (
                 <motion.div
                   key={s.key}
                   layout
-                  animate={{ background: bg }}
-                  transition={{
-                    layout: { duration: 0.3, ease: [0.33, 1, 0.68, 1] },
-                    background: { duration: 0.2 },
+                  animate={{
+                    height: open ? 28 : 8,
+                    paddingLeft: open ? 14 : 0,
+                    paddingRight: open ? 14 : 0,
+                    background: active
+                      ? ACCENT
+                      : done
+                        ? hovered ? 'rgba(196,84,26,0.5)' : ACCENT
+                        : hovered ? 'rgba(255,255,255,0.09)' : BORDER,
+                    boxShadow: active && hovered
+                      ? '0 0 12px rgba(196,84,26,0.55)'
+                      : '0 0 0px rgba(0,0,0,0)',
                   }}
+                  transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
                   style={{
-                    height: showLabel ? (active ? 30 : 26) : 8,
                     borderRadius: 999,
-                    padding: showLabel ? '0 14px' : 0,
                     display: 'flex',
                     alignItems: 'center',
                     minWidth: 8,
                     overflow: 'hidden',
                     whiteSpace: 'nowrap',
-                    outline: active && expanded ? `1.5px solid ${ACCENT}` : 'none',
-                    boxShadow: active && expanded ? `0 0 10px rgba(196,84,26,0.45)` : 'none',
                   }}
                 >
                   <AnimatePresence>
-                    {showLabel && (
+                    {open && (
                       <motion.span
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -101,9 +100,10 @@ export function StageProgress({ currentStage }: Props) {
                         transition={{ duration: 0.15 }}
                         style={{
                           fontSize: active ? 14 : 12,
-                          fontWeight: active ? 700 : 500,
-                          color: active ? '#fff' : done ? 'rgba(255,255,255,0.75)' : MUTED,
+                          fontWeight: active ? 700 : 400,
+                          color: active ? '#fff' : done ? 'rgba(255,255,255,0.65)' : MUTED,
                           lineHeight: 1,
+                          pointerEvents: 'none',
                         }}
                       >
                         {s.label}
