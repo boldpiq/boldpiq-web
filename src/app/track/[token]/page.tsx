@@ -31,6 +31,7 @@ interface PortalData {
     project_type: string | null
     last_viewed_at: string | null
     view_count: number
+    drive_folder_url: string | null
   }
   events: PortalEvent[]
 }
@@ -72,7 +73,9 @@ export default async function TrackPage(
   const { portal, events } = data
   const firstName = portal.display_name?.split(' ')[0] ?? 'there'
   const isClientReview = portal.current_stage === 'client_qa'
+  const isOnboarding = portal.current_stage === 'onboarding'
   const isCompleted = portal.current_stage === 'completed'
+  const hasActions = isClientReview || isOnboarding
 
   return (
     <>
@@ -115,10 +118,10 @@ export default async function TrackPage(
             )}
           </div>
 
-          {/* Actions — highlighted border when review is needed */}
+          {/* Actions — highlighted border when action is needed */}
           <div style={{
             background: SURFACE,
-            border: `1px solid ${isClientReview ? 'rgba(196,84,26,0.4)' : BORDER}`,
+            border: `1px solid ${hasActions ? 'rgba(196,84,26,0.4)' : BORDER}`,
             borderRadius: 16,
             padding: '24px 28px',
             marginBottom: 16,
@@ -126,8 +129,8 @@ export default async function TrackPage(
             <p style={{ fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED, marginBottom: 20 }}>
               Actions
             </p>
-            {isClientReview ? (
-              <ActionButtons token={token} currentStage={portal.current_stage} />
+            {hasActions ? (
+              <ActionButtons token={token} currentStage={portal.current_stage} driveFolderUrl={portal.drive_folder_url} />
             ) : (
               <p style={{ fontSize: 16, color: MUTED }}>No actions required at this stage.</p>
             )}
