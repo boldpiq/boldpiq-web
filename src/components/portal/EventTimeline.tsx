@@ -53,14 +53,14 @@ export function EventTimeline({ events }: Props) {
             flexShrink: 0,
             // i === 0 = current stage (in progress) → hollow with accent ring
             // i > 0   = completed stage            → filled accent
-            background: i === 0 ? 'transparent' : ACCENT,
-            border: `2px solid ${i === 0 ? ACCENT : ACCENT}`,
+            background: i === 0 ? 'transparent' : ev.is_milestone ? ACCENT : SURFACE,
+            border: `1px solid ${i === 0 ? (ev.is_milestone ? ACCENT : BORDER) : ev.is_milestone ? ACCENT : BORDER}`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 13,
             fontWeight: 700,
-            color: i === 0 ? ACCENT : '#fff',
+            color: i === 0 ? (ev.is_milestone ? ACCENT : MUTED) : ev.is_milestone ? '#fff' : MUTED,
           }}>
             {ICONS[ev.icon] ?? '·'}
           </div>
