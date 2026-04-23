@@ -30,8 +30,7 @@ interface Props { currentStage: string }
 export function StageProgress({ currentStage }: Props) {
   const [hovered, setHovered] = useState(false)
   const idx = STAGES.findIndex(s => s.key === currentStage)
-  // Progress bar fills only through completed stages (not the active one)
-  const pct = idx <= 0 ? 0 : Math.round(((idx - 1) / (STAGES.length - 1)) * 100)
+  const pct = idx < 0 ? 0 : Math.round((idx / (STAGES.length - 1)) * 100)
 
   return (
     <div style={{ marginBottom: 8 }}>
@@ -93,13 +92,14 @@ export function StageProgress({ currentStage }: Props) {
                     height: open ? 28 : 8,
                     paddingLeft: open ? 14 : 0,
                     paddingRight: open ? 14 : 0,
-                    // done = filled; active = hollow outline; future = empty
-                    background: done
-                      ? hovered ? 'rgba(196,84,26,0.55)' : ACCENT
-                      : 'transparent',
-                    boxShadow: active
-                      ? `0 0 0 2px ${ACCENT}`
-                      : '0 0 0 1px rgba(255,255,255,0.12)',
+                    background: active
+                      ? ACCENT
+                      : done
+                        ? hovered ? 'rgba(196,84,26,0.5)' : ACCENT
+                        : hovered ? 'rgba(255,255,255,0.09)' : BORDER,
+                    boxShadow: active && hovered
+                      ? '0 0 12px rgba(196,84,26,0.55)'
+                      : '0 0 0px rgba(0,0,0,0)',
                   }}
                   transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
                   style={{
@@ -121,7 +121,7 @@ export function StageProgress({ currentStage }: Props) {
                         style={{
                           fontSize: active ? 14 : 12,
                           fontWeight: active ? 700 : 400,
-                          color: active ? ACCENT : done ? 'rgba(255,255,255,0.65)' : MUTED,
+                          color: active ? '#fff' : done ? 'rgba(255,255,255,0.65)' : MUTED,
                           lineHeight: 1,
                           pointerEvents: 'none',
                         }}
