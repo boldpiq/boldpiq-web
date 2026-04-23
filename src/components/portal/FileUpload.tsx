@@ -7,6 +7,8 @@ const MUTED = 'rgba(255,255,255,0.45)'
 const BORDER = 'rgba(255,255,255,0.08)'
 
 const ACCEPT = 'image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.txt,.csv,.mp3,.mp4,.mov,.avi,.mkv,.heic,.heif,.raw'
+const N8N_UPLOAD = 'https://n8nservice.boldpiq.com/webhook/client-upload'
+const SECRET = '52um9c0GEki4JSIr9io5RKrkXJ5qtGBf2M4j2wpyxLBsxQGh+NGGiZTLNYp08dei'
 
 interface UploadedFile { name: string; ok: boolean }
 interface Props { token: string; folderUrl: string }
@@ -20,25 +22,27 @@ export function FileUpload({ token, folderUrl }: Props) {
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const uploadFileDirect = (file: File, uploadUrl: string): Promise<void> =>
+  const uploadFile = (file: File): Promise<void> =>
     new Promise((resolve, reject) => {
+      const fd = new FormData()
+      fd.append('file', file)
+      fd.append('folder_url', folderUrl)
+      fd.append('token', token)
+      fd.append('file_name', file.name)
+      fd.append('secret', SECRET)
+
       const xhr = new XMLHttpRequest()
       xhr.upload.addEventListener('progress', e => {
         if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100))
       })
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) resolve()
-        else reject(new Error(`Upload failed (${xhr.status}): ${xhr.responseText.slice(0, 200)}`))
+        else reject(new Error(`Upload failed (${xhr.status})`))
       })
       xhr.addEventListener('error', () => reject(new Error('Network error during upload')))
-      // Route through our edge proxy — avoids CORS and any body size limits
-      xhr.open('PUT', `/api/portal/${token}/upload-proxy`)
-      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
-      xhr.setRequestHeader('X-Drive-Url', uploadUrl)
-      if (file.size > 0) {
-        xhr.setRequestHeader('Content-Range', `bytes 0-${file.size - 1}/${file.size}`)
-      }
-      xhr.send(file)
+      // POST FormData — no custom headers, avoids CORS preflight (Cloudflare blocks OPTIONS)
+      xhr.open('POST', N8N_UPLOAD)
+      xhr.send(fd)
     })
 
   const upload = async (files: FileList | File[]) => {
@@ -52,34 +56,7 @@ export function FileUpload({ token, folderUrl }: Props) {
       setCurrentFile(file.name)
       setProgress(0)
       try {
-        // Step 1: Get a Google Drive resumable upload URL (only metadata goes through Vercel)
-        const initRes = await fetch(`/api/portal/${token}/upload-url`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fileName: file.name,
-            fileType: file.type || 'application/octet-stream',
-            fileSize: file.size,
-            folderUrl,
-          }),
-        })
-        if (!initRes.ok) {
-          const errBody = await initRes.text().catch(() => '')
-          throw new Error(`Init failed (${initRes.status}): ${errBody.slice(0, 120)}`)
-        }
-        const { uploadUrl } = await initRes.json()
-        if (!uploadUrl) throw new Error('No upload URL returned from server')
-
-        // Step 2: Upload directly to Google Drive — bypasses Vercel entirely
-        await uploadFileDirect(file, uploadUrl)
-
-        // Step 3: Log the event (fire-and-forget)
-        fetch(`/api/portal/${token}/upload-complete`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fileName: file.name }),
-        }).catch(() => {})
-
+        await uploadFile(file)
         results.push({ name: file.name, ok: true })
       } catch (err) {
         results.push({ name: file.name, ok: false })
@@ -145,7 +122,7 @@ export function FileUpload({ token, folderUrl }: Props) {
             <p style={{ color: '#fff', fontSize: 14, marginBottom: 4 }}>
               Drop files here or <span style={{ color: ACCENT, textDecoration: 'underline' }}>browse</span>
             </p>
-            <p style={{ color: MUTED, fontSize: 12 }}>Images, videos, PDFs and documents — up to 5 TB</p>
+            <p style={{ color: MUTED, fontSize: 12 }}>Images, videos, PDFs and documents</p>
           </>
         )}
       </div>
