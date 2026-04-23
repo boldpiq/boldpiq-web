@@ -28,12 +28,13 @@ export function FileUpload({ token, folderUrl }: Props) {
       })
       xhr.addEventListener('load', () => {
         if (xhr.status >= 200 && xhr.status < 300) resolve()
-        else reject(new Error(`Drive returned ${xhr.status}: ${xhr.responseText.slice(0, 200)}`))
+        else reject(new Error(`Upload failed (${xhr.status}): ${xhr.responseText.slice(0, 200)}`))
       })
-      xhr.addEventListener('error', () => reject(new Error('Network error — check browser console for CORS details')))
-      xhr.open('PUT', uploadUrl)
+      xhr.addEventListener('error', () => reject(new Error('Network error during upload')))
+      // Route through our edge proxy — avoids CORS and any body size limits
+      xhr.open('PUT', `/api/portal/${token}/upload-proxy`)
       xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
-      // Tell Drive this is the complete file (final chunk), required for files under 256 KB
+      xhr.setRequestHeader('X-Drive-Url', uploadUrl)
       if (file.size > 0) {
         xhr.setRequestHeader('Content-Range', `bytes 0-${file.size - 1}/${file.size}`)
       }
