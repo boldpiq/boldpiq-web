@@ -71,7 +71,8 @@ export default async function TrackPage(
   if (!data) notFound()
 
   const { portal, events } = data
-  const firstName = portal.display_name?.split(' ')[0] ?? 'there'
+  const displayName = portal.display_name ?? 'there'
+  const firstName = displayName.split(' ')[0]
   const isClientReview = portal.current_stage === 'client_qa'
   const isOnboarding = portal.current_stage === 'onboarding'
   const isCompleted = portal.current_stage === 'completed'
@@ -94,7 +95,7 @@ export default async function TrackPage(
               </span>
             </div>
             <h1 style={{ fontSize: 'clamp(1.5rem,4vw,2.25rem)', fontWeight: 700, marginBottom: 6 }}>
-              Hi {firstName} 👋
+              Hi {displayName} 👋
             </h1>
             {portal.project_type && (
               <p style={{ color: MUTED, fontSize: 17 }}>{portal.project_type}</p>
