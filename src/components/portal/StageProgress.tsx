@@ -68,15 +68,19 @@ export function StageProgress({ currentStage }: Props) {
                 <React.Fragment key={s.key}>
                 {i > 0 && (
                   <motion.span
-                    animate={{ opacity: hovered ? 0.35 : 0, scale: hovered ? 1 : 0.5 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    layout
+                    initial={{ opacity: 0, scale: 0.4 }}
+                    animate={{ opacity: hovered ? 0.6 : 0, scale: hovered ? 1 : 0.4 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
                     style={{
-                      fontSize: 10,
+                      fontSize: 14,
                       color: '#fff',
                       lineHeight: 1,
                       pointerEvents: 'none',
                       userSelect: 'none',
                       flexShrink: 0,
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
                   >
                     ›
