@@ -7,8 +7,10 @@ const MUTED = 'rgba(255,255,255,0.45)'
 const BORDER = 'rgba(255,255,255,0.08)'
 
 const ACCEPT = 'image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.txt,.csv,.mp3,.mp4,.mov,.avi,.mkv,.heic,.heif,.raw'
-const N8N_UPLOAD = 'https://n8nservice.boldpiq.com/webhook/client-upload'
-const SECRET = '52um9c0GEki4JSIr9io5RKrkXJ5qtGBf2M4j2wpyxLBsxQGh+NGGiZTLNYp08dei'
+
+// 4 MB per chunk — stays under Vercel Edge's 4.5 MB request body limit
+// Drive requires non-final chunks to be multiples of 256 KB; 4 MB = 16 × 256 KB ✓
+const CHUNK = 4 * 1024 * 1024
 
 interface UploadedFile { name: string; ok: boolean }
 interface Props { token: string; folderUrl: string }
@@ -22,28 +24,72 @@ export function FileUpload({ token, folderUrl }: Props) {
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const uploadFile = (file: File): Promise<void> =>
+  const uploadChunk = (
+    uploadUrl: string,
+    chunk: Blob,
+    start: number,
+    fileSize: number,
+    fileType: string,
+    onChunkProgress: (loaded: number) => void,
+  ): Promise<void> =>
     new Promise((resolve, reject) => {
-      const fd = new FormData()
-      fd.append('file', file)
-      fd.append('folder_url', folderUrl)
-      fd.append('token', token)
-      fd.append('file_name', file.name)
-      fd.append('secret', SECRET)
-
+      const end = start + chunk.size - 1
       const xhr = new XMLHttpRequest()
       xhr.upload.addEventListener('progress', e => {
-        if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100))
+        if (e.lengthComputable) onChunkProgress(e.loaded)
       })
       xhr.addEventListener('load', () => {
-        if (xhr.status >= 200 && xhr.status < 300) resolve()
-        else reject(new Error(`Upload failed (${xhr.status})`))
+        // Drive returns 308 while upload is in progress, 200/201 when complete
+        if (xhr.status === 308 || xhr.status === 200 || xhr.status === 201) resolve()
+        else reject(new Error(`Upload failed (${xhr.status}): ${xhr.responseText.slice(0, 200)}`))
       })
       xhr.addEventListener('error', () => reject(new Error('Network error during upload')))
-      // POST FormData — no custom headers, avoids CORS preflight (Cloudflare blocks OPTIONS)
-      xhr.open('POST', N8N_UPLOAD)
-      xhr.send(fd)
+      // Same-origin Vercel proxy — no CORS, no 4.5 MB limit per-chunk issue
+      xhr.open('PUT', `/api/portal/${token}/upload-proxy`)
+      xhr.setRequestHeader('Content-Type', fileType || 'application/octet-stream')
+      xhr.setRequestHeader('X-Drive-Url', uploadUrl)
+      xhr.setRequestHeader('Content-Range', `bytes ${start}-${end}/${fileSize}`)
+      xhr.send(chunk)
     })
+
+  const uploadFile = async (file: File): Promise<void> => {
+    // Step 1: Create Drive resumable session (only metadata — tiny, no size limit)
+    const initRes = await fetch(`/api/portal/${token}/upload-url`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fileName: file.name,
+        fileType: file.type || 'application/octet-stream',
+        fileSize: file.size,
+        folderUrl,
+      }),
+    })
+    if (!initRes.ok) {
+      const errBody = await initRes.text().catch(() => '')
+      throw new Error(`Init failed (${initRes.status}): ${errBody.slice(0, 120)}`)
+    }
+    const { uploadUrl } = await initRes.json()
+    if (!uploadUrl) throw new Error('No upload URL returned from server')
+
+    // Step 2: Upload in 4 MB chunks through Vercel edge proxy → Drive
+    const fileType = file.type || 'application/octet-stream'
+    let offset = 0
+    while (offset < file.size) {
+      const chunkStart = offset
+      const chunk = file.slice(offset, offset + CHUNK)
+      await uploadChunk(uploadUrl, chunk, chunkStart, file.size, fileType, loaded => {
+        setProgress(Math.round(((chunkStart + loaded) / file.size) * 100))
+      })
+      offset += chunk.size
+    }
+
+    // Step 3: Log the event (fire-and-forget)
+    fetch(`/api/portal/${token}/upload-complete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fileName: file.name }),
+    }).catch(() => {})
+  }
 
   const upload = async (files: FileList | File[]) => {
     const list = Array.from(files)
