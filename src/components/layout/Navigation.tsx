@@ -241,7 +241,7 @@ export function Navigation({
                 <div style={{ display: "flex", animation: "menuMarquee 28s linear infinite", whiteSpace: "nowrap", width: "max-content" }}>
                   {[...Array(4)].map((_, rep) => (
                     <span key={rep} style={{ display: "inline-flex", alignItems: "center" }}>
-                      {["Web Design", "Web Development", "Brand Identity", "GEO Optimised", "Conversion Focused", "Mobile First", "Sanity CMS", "Motion & Animation", "Results Driven", "Vercel Hosted"].map((item) => (
+                      {["Web Design", "Web Development", "Brand Identity", "GEO Optimised", "Conversion Focused", "Mobile First", "GHL Powered", "Motion & Animation", "Results Driven", "Automation Included"].map((item) => (
                         <span key={item} style={{ display: "inline-flex", alignItems: "center", fontSize: 13, fontWeight: 500, color: MUTED }}>
                           {item}
                           <span style={{ margin: "0 16px", opacity: 0.3 }}>•</span>

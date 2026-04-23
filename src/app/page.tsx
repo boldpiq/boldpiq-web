@@ -335,7 +335,7 @@ export default function Home() {
       {/* ── MARQUEE ──────────────────────────────────────────────── */}
       <div style={{ padding: "28px 0", borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
         <VelocityMarquee
-          items={["Web Design", "Web Development", "Brand Identity", "GEO Optimised", "Conversion Focused", "Mobile First", "Sanity CMS", "Motion & Animation", "Results Driven", "Vercel Hosted"]}
+          items={["Web Design", "Web Development", "Brand Identity", "GEO Optimised", "Conversion Focused", "Mobile First", "GHL Powered", "Motion & Animation", "Results Driven", "Automation Included"]}
           baseVelocity={-2}
         />
       </div>
@@ -397,7 +397,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 20 }}>
           {[
             { number: "01", title: "Web Design", description: "Award-worthy designs that stop the scroll, earn the click, and reflect the premium nature of your brand.", tags: ["UI/UX", "Figma", "Motion Design", "Responsive"] },
-            { number: "02", title: "Web Development", description: "Fast, secure, scalable Next.js websites — optimised for Core Web Vitals and AI search from day one.", tags: ["Next.js", "TypeScript", "Vercel", "Sanity CMS"] },
+            { number: "02", title: "Web Development", description: "Built on GoHighLevel — so your website, CRM, bookings, and automations all live in one place. One login. No tech stack to manage.", tags: ["GoHighLevel", "CRM Integrated", "Booking Ready", "Automation Native"] },
             { number: "03", title: "Brand Identity", description: "Visual systems that command attention and build instant trust — logo, typography, colour, and full brand guidelines.", tags: ["Logo", "Typography", "Colour System", "Guidelines"] },
           ].map((s, i) => (
             <ScrollReveal key={s.title} effect="fade-up" delay={i * 0.1}><ServiceCard {...s} /></ScrollReveal>
@@ -443,7 +443,7 @@ export default function Home() {
               {[
                 { number: "01", title: "Brief", description: "We learn your business, your goals, and your audience inside out. No guesswork — we build from a clear foundation of what success looks like for you." },
                 { number: "02", title: "Design", description: "We craft a visual direction that earns your sign-off fast. You see and approve the full homepage design before a single line of code is written." },
-                { number: "03", title: "Build", description: "Clean, fast, secure Next.js code with world-class animations — connected to your GHL CRM and GEO-optimised for AI search from day one." },
+                { number: "03", title: "Build", description: "Your site is built inside GoHighLevel — so your forms, bookings, and automations are connected from day one. No separate tech stack to manage. Everything lives in one platform." },
                 { number: "04", title: "Launch", description: "We handle domain, hosting, analytics, and GEO setup. You go live with a site that works as hard as you do. We don't disappear after launch." },
               ].map((step, i) => (
                 <ScrollReveal key={step.number} effect="fade-up" delay={i * 0.05}>

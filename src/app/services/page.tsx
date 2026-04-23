@@ -40,11 +40,11 @@ const services = [
   {
     number: "02",
     title: "Web Development",
-    tagline: "Fast, secure, built to scale.",
-    description: "We build in Next.js — the same stack used by the world's fastest websites. Your site loads fast, and is connected to your GHL CRM from day one.",
-    deliverables: ["Next.js + TypeScript codebase", "Sanity CMS integration", "GHL CRM form connections", "Core Web Vitals optimised", "GEO-optimised for AI search (ChatGPT, Perplexity)"],
-    tags: ["Next.js", "TypeScript", "Vercel", "Sanity CMS", "GHL", "GEO"],
-    outcome: "Sites built to support ranking potential, load fast, and work on every device.",
+    tagline: "One platform. Zero tech headaches.",
+    description: "We build your website inside GoHighLevel — so your forms, bookings, CRM, and automations are all connected from day one. No separate hosting. No disconnected tools. One platform your whole business runs through.",
+    deliverables: ["GHL website design & build", "Forms, bookings & CRM connected natively", "Automation workflows wired in", "Mobile-first responsive design", "GEO-optimised structure for AI search"],
+    tags: ["GoHighLevel", "CRM Native", "Booking Integration", "Automation Ready", "GEO"],
+    outcome: "A website already connected to your CRM, bookings, and automations on day one.",
   },
   {
     number: "03",
@@ -61,8 +61,8 @@ const faqs = [
   { q: "How long does a project take?", a: "Most websites are live within 6 weeks of the brief. Brand identity projects typically run 2–3 weeks. Timelines are agreed upfront — we don't move goalposts." },
   { q: "Do you work with businesses outside South Africa?", a: "Yes. We work with clients across Australia, the UK, US, and beyond. All projects are managed remotely with clear communication every step of the way." },
   { q: "What do you need from me to get started?", a: "A brief call to understand your business, goals, and audience. We handle the rest and come back with a clear plan before any money changes hands." },
-  { q: "Will I own the website and brand assets?", a: "Absolutely. Everything we create is yours — full ownership of all files, code, and assets. No lock-in, no ongoing licence fees." },
-  { q: "Can you connect my website to my existing tools?", a: "Yes. We integrate with GHL CRM, Calendly, booking software, and most major tools. Ask us about your specific stack." },
+  { q: "Will I own the website and brand assets?", a: "Absolutely. All design files, brand assets, and content we create are 100% yours — no strings attached. Your website runs on GoHighLevel; we'll walk you through account setup, access, and what's included on our first call." },
+  { q: "What platform do you build websites on?", a: "We build on GoHighLevel — the same platform that manages your leads, CRM, bookings, and automations. Your website, forms, booking calendar, and automation workflows are all in one place. No separate hosting to worry about." },
 ]
 
 const faqSchema = {
@@ -134,7 +134,7 @@ export default function ServicesPage() {
               {[
                 { icon: "⚡", title: "Fast load times", desc: "Optimised for speed on every device." },
                 { icon: "📱", title: "Mobile-first design", desc: "Pixel-perfect on every screen, every browser." },
-                { icon: "🔒", title: "Security hardened", desc: "CSP headers, HTTPS, no exposed secrets — ever." },
+                { icon: "🔒", title: "Security hardened", desc: "HTTPS, secure forms, and spam protection — built into the GoHighLevel platform." },
                 { icon: "🤖", title: "GEO optimised", desc: "Structured to be cited by ChatGPT, Perplexity, and Google AI." },
                 { icon: "📊", title: "Analytics ready", desc: "Privacy-first analytics installed and verified before launch." },
                 { icon: "🚀", title: "30-day post-launch support", desc: "We stay available after go-live. No disappearing act." },

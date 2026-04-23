@@ -128,8 +128,8 @@ describe('Footer', () => {
 
     it('renders phone number', () => {
       render(<Footer />)
-      expect(screen.getByRole('link', { name: '+27 21 815 1634' })).toHaveAttribute(
-        'href', 'tel:+27218151634'
+      expect(screen.getByRole('link', { name: '+27 21 815 6326' })).toHaveAttribute(
+        'href', 'tel:+27218156326'
       )
     })
 

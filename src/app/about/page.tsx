@@ -166,18 +166,18 @@ export default function AboutPage() {
           <div style={{ padding: "clamp(32px, 4vw, 64px)", border: `1px solid ${BORDER}`, borderRadius: 24, background: `linear-gradient(135deg, rgba(196,84,26,0.14) 0%, ${SURFACE} 100%)` }}>
             <Eyebrow label="Our Stack" />
             <h2 style={{ fontSize: "clamp(28px, 3vw, 44px)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 40 }}>
-              Tools that let us build<br /><span style={{ color: ACCENT }}>without limits.</span>
+              One platform.<br /><span style={{ color: ACCENT }}>Everything connected.</span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4" style={{ gap: 16 }}>
               {[
-                { name: "Next.js 16", role: "Framework" },
-                { name: "TypeScript", role: "Language" },
-                { name: "Motion", role: "Animation" },
-                { name: "Tailwind v4", role: "Styling" },
-                { name: "Sanity CMS", role: "Content" },
-                { name: "Vercel", role: "Hosting" },
-                { name: "GoHighLevel", role: "CRM / Forms" },
+                { name: "GoHighLevel", role: "Website & CRM" },
+                { name: "GHL Funnels", role: "Sales Pages" },
+                { name: "GHL Automations", role: "Lead Nurturing" },
+                { name: "GHL Bookings", role: "Scheduling" },
+                { name: "n8n", role: "Advanced Automation" },
+                { name: "Make", role: "Integrations" },
                 { name: "Figma", role: "Design" },
+                { name: "Canva / Adobe", role: "Brand Assets" },
               ].map(tool => (
                 <motion.div
                   key={tool.name}
