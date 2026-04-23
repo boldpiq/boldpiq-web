@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, LayoutGroup } from 'motion/react'
 
 const STAGES = [
   { key: 'discovery',               label: 'Discovery' },
@@ -24,7 +24,6 @@ const STAGES = [
 const ACCENT = '#C4541A'
 const MUTED = 'rgba(255,255,255,0.45)'
 const BORDER = 'rgba(255,255,255,0.08)'
-const SURFACE = 'rgba(255,255,255,0.04)'
 
 interface Props { currentStage: string }
 
@@ -48,8 +47,13 @@ export function StageProgress({ currentStage }: Props) {
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
-            style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: hoveredIdx !== null ? '#fff' : MUTED }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            style={{
+              fontSize: 12,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: hoveredIdx !== null ? '#fff' : MUTED,
+            }}
           >
             {displayLabel || 'Progress'}
           </motion.span>
@@ -60,7 +64,7 @@ export function StageProgress({ currentStage }: Props) {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.85 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             style={{ fontSize: 12, fontWeight: 600, color: ACCENT }}
           >
             {displayPct}%
@@ -72,61 +76,59 @@ export function StageProgress({ currentStage }: Props) {
       <div style={{ height: 4, background: BORDER, borderRadius: 999, overflow: 'hidden', marginBottom: 20 }}>
         <motion.div
           animate={{ width: `${displayPct}%` }}
-          transition={{ duration: hoveredIdx !== null ? 0.25 : 1, ease: [0.33, 1, 0.68, 1] }}
+          transition={{ duration: hoveredIdx !== null ? 0.2 : 1, ease: [0.33, 1, 0.68, 1] }}
           style={{ height: '100%', background: ACCENT, borderRadius: 999 }}
         />
       </div>
 
-      {/* Stage dots */}
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-        {STAGES.map((s, i) => {
-          const done = i <= idx
-          const active = i === idx
-          const hovered = hoveredIdx === i
-          const expanded = active || hovered
+      {/* Stage dots — layout group so dots reflow smoothly when one expands */}
+      <LayoutGroup>
+        <motion.div layout style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
+          {STAGES.map((s, i) => {
+            const done = i <= idx
+            const active = i === idx
+            const hovered = hoveredIdx === i
+            const expanded = active || hovered
+            const bg = hovered && !done ? 'rgba(196,84,26,0.35)' : done ? ACCENT : BORDER
 
-          return (
-            <motion.div
-              key={s.key}
-              onMouseEnter={() => setHoveredIdx(i)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              animate={{
-                height: expanded ? 28 : 8,
-                width: expanded ? 'auto' : 8,
-                background: hovered && !done ? 'rgba(196,84,26,0.4)' : done ? ACCENT : BORDER,
-                scale: hovered ? 1.05 : 1,
-              }}
-              transition={{ duration: 0.22, ease: [0.33, 1, 0.68, 1] }}
-              style={{
-                minWidth: expanded ? 'auto' : 8,
-                borderRadius: 999,
-                padding: expanded ? '0 16px' : 0,
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: 14,
-                fontWeight: 600,
-                color: '#fff',
-                whiteSpace: 'nowrap',
-                cursor: 'default',
-                overflow: 'hidden',
-              }}
-            >
-              <AnimatePresence>
-                {expanded && (
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    {s.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          )
-        })}
-      </div>
+            return (
+              <motion.div
+                key={s.key}
+                layout
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                animate={{ background: bg }}
+                transition={{ layout: { duration: 0.22, ease: [0.33, 1, 0.68, 1] }, background: { duration: 0.2 } }}
+                style={{
+                  height: expanded ? 28 : 8,
+                  borderRadius: 999,
+                  padding: expanded ? '0 14px' : 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: 8,
+                  cursor: 'default',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <AnimatePresence>
+                  {expanded && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.12 }}
+                      style={{ fontSize: 13, fontWeight: 600, color: '#fff', lineHeight: 1 }}
+                    >
+                      {s.label}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </LayoutGroup>
     </div>
   )
 }
