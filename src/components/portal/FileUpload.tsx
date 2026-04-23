@@ -193,7 +193,8 @@ export function FileUpload({ token, folderUrl }: Props) {
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: f.ok ? ACCENT : '#ef4444',
+              background: f.ok ? ACCENT : 'transparent',
+              border: f.ok ? 'none' : '1.5px solid #ef4444',
               flexShrink: 0,
             }} />
             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{f.name}</span>
