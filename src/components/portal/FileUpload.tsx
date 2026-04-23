@@ -6,8 +6,7 @@ const ACCENT = '#C4541A'
 const MUTED = 'rgba(255,255,255,0.45)'
 const BORDER = 'rgba(255,255,255,0.08)'
 
-const MAX_MB = 500
-const ACCEPT = 'image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.txt'
+const ACCEPT = 'image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.txt,.csv,.mp3,.mp4,.mov,.avi,.mkv,.heic,.heif,.raw'
 
 interface UploadedFile { name: string; ok: boolean }
 interface Props { token: string; folderUrl: string }
@@ -15,9 +14,27 @@ interface Props { token: string; folderUrl: string }
 export function FileUpload({ token, folderUrl }: Props) {
   const [dragging, setDragging] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [currentFile, setCurrentFile] = useState('')
   const [uploaded, setUploaded] = useState<UploadedFile[]>([])
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const uploadFileDirect = (file: File, uploadUrl: string): Promise<void> =>
+    new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.upload.addEventListener('progress', e => {
+        if (e.lengthComputable) setProgress(Math.round((e.loaded / e.total) * 100))
+      })
+      xhr.addEventListener('load', () => {
+        if (xhr.status >= 200 && xhr.status < 300) resolve()
+        else reject(new Error(`Drive upload returned ${xhr.status}`))
+      })
+      xhr.addEventListener('error', () => reject(new Error('Network error')))
+      xhr.open('PUT', uploadUrl)
+      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
+      xhr.send(file)
+    })
 
   const upload = async (files: FileList | File[]) => {
     const list = Array.from(files)
@@ -25,21 +42,46 @@ export function FileUpload({ token, folderUrl }: Props) {
     setUploading(true)
     setError('')
     const results: UploadedFile[] = []
+
     for (const file of list) {
-      const fd = new FormData()
-      fd.append('file', file)
-      fd.append('folder_url', folderUrl)
+      setCurrentFile(file.name)
+      setProgress(0)
       try {
-        const res = await fetch(`/api/portal/${token}/upload`, { method: 'POST', body: fd })
-        results.push({ name: file.name, ok: res.ok })
-        if (!res.ok) setError('One or more files failed to upload.')
-      } catch {
+        // Step 1: Get a Google Drive resumable upload URL (only metadata goes through Vercel)
+        const initRes = await fetch(`/api/portal/${token}/upload-url`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fileName: file.name,
+            fileType: file.type || 'application/octet-stream',
+            fileSize: file.size,
+            folderUrl,
+          }),
+        })
+        if (!initRes.ok) throw new Error('Could not initialise upload')
+        const { uploadUrl } = await initRes.json()
+
+        // Step 2: Upload directly to Google Drive — bypasses Vercel entirely
+        await uploadFileDirect(file, uploadUrl)
+
+        // Step 3: Log the event (fire-and-forget)
+        fetch(`/api/portal/${token}/upload-complete`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName: file.name }),
+        }).catch(() => {})
+
+        results.push({ name: file.name, ok: true })
+      } catch (err) {
         results.push({ name: file.name, ok: false })
-        setError('Upload failed. Please try again.')
+        setError('One or more files failed to upload.')
       }
     }
+
     setUploaded(prev => [...prev, ...results])
     setUploading(false)
+    setCurrentFile('')
+    setProgress(0)
   }
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -49,15 +91,10 @@ export function FileUpload({ token, folderUrl }: Props) {
   }
 
   return (
-    <div style={{ marginTop: 20 }}>
-      <p style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, marginBottom: 12 }}>
-        Upload Files
-      </p>
-
-      {/* Drop zone */}
+    <div>
       <div
-        onClick={() => inputRef.current?.click()}
-        onDragOver={e => { e.preventDefault(); setDragging(true) }}
+        onClick={() => !uploading && inputRef.current?.click()}
+        onDragOver={e => { e.preventDefault(); if (!uploading) setDragging(true) }}
         onDragLeave={() => setDragging(false)}
         onDrop={onDrop}
         style={{
@@ -80,18 +117,30 @@ export function FileUpload({ token, folderUrl }: Props) {
           disabled={uploading}
         />
         {uploading ? (
-          <p style={{ color: MUTED, fontSize: 14 }}>Uploading…</p>
+          <div>
+            <p style={{ color: MUTED, fontSize: 13, marginBottom: 10 }}>
+              Uploading{currentFile ? ` "${currentFile}"` : '…'} — {progress}%
+            </p>
+            <div style={{ width: '100%', height: 3, background: BORDER, borderRadius: 2 }}>
+              <div style={{
+                width: `${progress}%`,
+                height: '100%',
+                background: ACCENT,
+                borderRadius: 2,
+                transition: 'width 0.1s linear',
+              }} />
+            </div>
+          </div>
         ) : (
           <>
             <p style={{ color: '#fff', fontSize: 14, marginBottom: 4 }}>
               Drop files here or <span style={{ color: ACCENT, textDecoration: 'underline' }}>browse</span>
             </p>
-            <p style={{ color: MUTED, fontSize: 12 }}>Images, videos, PDFs and documents — up to 500 MB</p>
+            <p style={{ color: MUTED, fontSize: 12 }}>Images, videos, PDFs and documents — up to 5 TB</p>
           </>
         )}
       </div>
 
-      {/* Results */}
       <AnimatePresence>
         {uploaded.map((f, i) => (
           <motion.div

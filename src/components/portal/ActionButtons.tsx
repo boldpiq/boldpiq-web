@@ -17,56 +17,82 @@ export function ActionButtons({ token, currentStage, driveFolderUrl, firstName }
   if (currentStage === 'onboarding') {
     return (
       <div>
-        <p style={{ fontSize: 13, color: MUTED, marginBottom: 16 }}>
-          {firstName ? `${firstName}, your` : 'Your'} dedicated project folder has been created. All assets, files, and deliverables will be shared here throughout the project.
+        <p style={{ fontSize: 14, color: MUTED, marginBottom: 28, lineHeight: 1.6 }}>
+          {firstName ? `Welcome aboard, ${firstName}.` : 'Welcome aboard.'} Your project is now set up — use the sections below to access your folder and share any files with us.
         </p>
-        {driveFolderUrl ? (
-          <a
-            href={driveFolderUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 10,
-              padding: '11px 22px',
-              background: 'rgba(255,255,255,0.06)',
-              border: `1px solid ${BORDER}`,
-              borderRadius: 8,
-              color: '#fff',
-              textDecoration: 'none',
-              fontWeight: 500,
-              fontSize: 14,
-              transition: 'border-color 0.15s ease, background 0.15s ease',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget
-              el.style.borderColor = 'rgba(196,84,26,0.5)'
-              el.style.background = 'rgba(196,84,26,0.08)'
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget
-              el.style.borderColor = BORDER
-              el.style.background = 'rgba(255,255,255,0.06)'
-            }}
-          >
-            <svg width="18" height="16" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#0066da" d="M6.6 66.85 3.1 72.9c-.8 1.4-.5 3.1.6 4.2 1.1 1.1 2.7 1.4 4.1.6l3.5-2L6.6 66.85z"/>
-              <path fill="#00ac47" d="M43.65 24.9 29.9 1.2C29.1-.2 27.3-.4 26.1.5L6.6 11.15l20.85 36.1z"/>
-              <path fill="#ea4335" d="M80.7 11.15 61.2.5c-1.2-.9-3-.7-3.8.7L43.65 24.9l16.25 22.35 20.85-36.1z"/>
-              <path fill="#00832d" d="M27.45 47.25 6.6 11.15 0 22.75c-.8 1.4-.8 3.1 0 4.5L20.85 62.5l6.6-15.25z"/>
-              <path fill="#2684fc" d="M59.85 47.25 53.25 62.5l20.85-35.25c.8-1.4.8-3.1 0-4.5L66.45 11.15z"/>
-              <path fill="#ffba00" d="M43.65 24.9 27.45 47.25l16.2 15.25 16.2-15.25z"/>
-              <path fill="#0066da" d="M43.65 62.5 20.85 62.5 6.6 66.85l37.05 10.85 37.05-10.85-13.2-4.35z"/>
-              <path fill="#00ac47" d="M20.85 62.5 6.6 66.85l-.95 1.65c-.8 1.4-.5 3.1.6 4.2l14.6-10.1z"/>
-              <path fill="#ea4335" d="M66.45 62.5l14.6 10.1c1.1-1.1 1.4-2.8.6-4.2l-.95-1.65z"/>
-            </svg>
-            Open Project Folder
-          </a>
-        ) : (
-          <p style={{ fontSize: 13, color: MUTED }}>Your folder is being prepared — check back shortly.</p>
-        )}
-        {driveFolderUrl && <FileUpload token={token} folderUrl={driveFolderUrl} />}
+
+        {/* ── Project Folder ── */}
+        <div style={{ marginBottom: 28 }}>
+          <p style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, marginBottom: 8 }}>
+            Project Folder
+          </p>
+          <p style={{ fontSize: 13, color: MUTED, marginBottom: 14, lineHeight: 1.5 }}>
+            All deliverables, drafts, and shared files will appear here throughout the project.
+          </p>
+          {driveFolderUrl ? (
+            <a
+              href={driveFolderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '11px 22px',
+                background: 'rgba(255,255,255,0.06)',
+                border: `1px solid ${BORDER}`,
+                borderRadius: 8,
+                color: '#fff',
+                textDecoration: 'none',
+                fontWeight: 500,
+                fontSize: 14,
+                transition: 'border-color 0.15s ease, background 0.15s ease',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget
+                el.style.borderColor = 'rgba(196,84,26,0.5)'
+                el.style.background = 'rgba(196,84,26,0.08)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget
+                el.style.borderColor = BORDER
+                el.style.background = 'rgba(255,255,255,0.06)'
+              }}
+            >
+              <svg width="18" height="16" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#0066da" d="M6.6 66.85 3.1 72.9c-.8 1.4-.5 3.1.6 4.2 1.1 1.1 2.7 1.4 4.1.6l3.5-2L6.6 66.85z"/>
+                <path fill="#00ac47" d="M43.65 24.9 29.9 1.2C29.1-.2 27.3-.4 26.1.5L6.6 11.15l20.85 36.1z"/>
+                <path fill="#ea4335" d="M80.7 11.15 61.2.5c-1.2-.9-3-.7-3.8.7L43.65 24.9l16.25 22.35 20.85-36.1z"/>
+                <path fill="#00832d" d="M27.45 47.25 6.6 11.15 0 22.75c-.8 1.4-.8 3.1 0 4.5L20.85 62.5l6.6-15.25z"/>
+                <path fill="#2684fc" d="M59.85 47.25 53.25 62.5l20.85-35.25c.8-1.4.8-3.1 0-4.5L66.45 11.15z"/>
+                <path fill="#ffba00" d="M43.65 24.9 27.45 47.25l16.2 15.25 16.2-15.25z"/>
+                <path fill="#0066da" d="M43.65 62.5 20.85 62.5 6.6 66.85l37.05 10.85 37.05-10.85-13.2-4.35z"/>
+                <path fill="#00ac47" d="M20.85 62.5 6.6 66.85l-.95 1.65c-.8 1.4-.5 3.1.6 4.2l14.6-10.1z"/>
+                <path fill="#ea4335" d="M66.45 62.5l14.6 10.1c1.1-1.1 1.4-2.8.6-4.2l-.95-1.65z"/>
+              </svg>
+              Open in Google Drive
+            </a>
+          ) : (
+            <p style={{ fontSize: 13, color: MUTED }}>Your folder is being prepared — check back shortly.</p>
+          )}
+        </div>
+
+        {/* ── Divider ── */}
+        <div style={{ height: 1, background: BORDER, marginBottom: 28 }} />
+
+        {/* ── Share Files ── */}
+        <div>
+          <p style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: MUTED, marginBottom: 8 }}>
+            Share Your Assets
+          </p>
+          <p style={{ fontSize: 13, color: MUTED, marginBottom: 14, lineHeight: 1.5 }}>
+            Upload any images, videos, brand files, or references you'd like us to work with.
+          </p>
+          {driveFolderUrl
+            ? <FileUpload token={token} folderUrl={driveFolderUrl} />
+            : <p style={{ fontSize: 13, color: MUTED }}>Available once your folder is ready.</p>
+          }
+        </div>
       </div>
     )
   }
