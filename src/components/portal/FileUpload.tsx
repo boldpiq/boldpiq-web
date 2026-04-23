@@ -33,6 +33,10 @@ export function FileUpload({ token, folderUrl }: Props) {
       xhr.addEventListener('error', () => reject(new Error('Network error')))
       xhr.open('PUT', uploadUrl)
       xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
+      // Tell Drive this is the complete file (final chunk), required for files under 256 KB
+      if (file.size > 0) {
+        xhr.setRequestHeader('Content-Range', `bytes 0-${file.size - 1}/${file.size}`)
+      }
       xhr.send(file)
     })
 
