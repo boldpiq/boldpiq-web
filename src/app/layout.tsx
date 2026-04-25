@@ -199,6 +199,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           data-cmp-host="b.delivery.consentmanager.net"
           data-cmp-cdn="cdn.consentmanager.net"
           data-cmp-codesrc="0"
+          nonce={nonce}
         />
         <meta name="theme-color" content="#0B0F1C" />
         <meta name="msapplication-TileColor" content="#C4541A" />
