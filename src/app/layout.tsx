@@ -3,10 +3,9 @@ import { Geist } from "next/font/google"
 import { LenisProvider } from "@/components/scroll/LenisProvider"
 import { PageTransition } from "@/components/transitions/PageTransition"
 import { Navigation } from "@/components/layout/Navigation"
-import { CookieConsent } from "@/components/ui/CookieConsent"
 import { ScrollToTop } from "@/components/ui/ScrollToTop"
 import { GHLChatWidget } from "@/components/ui/GHLChatWidget"
-import Script from "next/script"
+import { GHLFormScript } from "@/components/ui/GHLFormScript"
 import { headers } from 'next/headers'
 import { NonceProvider } from '@/lib/nonce'
 import "./globals.css"
@@ -192,6 +191,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <head>
+        {/* consentmanager.net CMP — must be first script for auto-blocking to work */}
+        <script
+          type="text/javascript"
+          data-cmp-ab="1"
+          src="https://cdn.consentmanager.net/delivery/autoblocking/46ef2127e265c.js"
+          data-cmp-host="b.delivery.consentmanager.net"
+          data-cmp-cdn="cdn.consentmanager.net"
+          data-cmp-codesrc="0"
+        />
         <meta name="theme-color" content="#0B0F1C" />
         <meta name="msapplication-TileColor" content="#C4541A" />
         <link rel="icon" href={FAVICON} type="image/png" />
@@ -228,19 +236,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           {/* Scroll to top button */}
           <ScrollToTop />
-
-          {/* Cookie Consent Banner */}
-          <CookieConsent />
         </NonceProvider>
 
-        {/* GHL Booking & Form Embed Script (global — required for all booking widgets) */}
-        <Script
-          src="https://link.zip360.co.za/js/form_embed.js"
-          strategy="afterInteractive"
-          nonce={nonce}
-        />
-
-        {/* GHL Chat Widget — injected outside React tree to prevent DOM reconciliation errors */}
+        {/* GHL scripts — gated on functional consent (GDPR compliant) */}
+        <GHLFormScript nonce={nonce} />
         <GHLChatWidget nonce={nonce} />
       </body>
     </html>

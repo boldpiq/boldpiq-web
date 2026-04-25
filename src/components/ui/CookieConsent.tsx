@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Link from "next/link"
+import { CONSENT_KEY, CONSENT_EVENT } from "@/lib/consent"
 
 const BG_BANNER = "rgba(11,15,28,0.97)"
 const ACCENT = "#C4541A"
 const MUTED = "rgba(255,255,255,0.5)"
 const BORDER = "rgba(255,255,255,0.1)"
-const STORAGE_KEY = "boldpiq_cookie_consent"
+const STORAGE_KEY = CONSENT_KEY
 
 type ConsentState = "all" | "essential" | null
 
@@ -42,6 +43,7 @@ export function CookieConsent() {
         prefs: customPrefs ?? prefs,
         timestamp: Date.now(),
       }))
+      window.dispatchEvent(new CustomEvent(CONSENT_EVENT))
     } catch {
       // ignore
     }
@@ -124,7 +126,7 @@ export function CookieConsent() {
                         We value your privacy
                       </p>
                       <p style={{ color: MUTED, fontSize: 13, lineHeight: 1.65, maxWidth: 720 }}>
-                        Boldpiq uses cookies to enhance your experience, analyse site traffic, and deliver relevant content. We collect usage data, IP addresses, and browser information to improve our platform and marketing. By continuing, you consent to our use of cookies.{" "}
+                        Boldpiq uses cookies to enhance your experience, analyse site traffic, and deliver relevant content. We collect usage data, IP addresses, and browser information to improve our platform and marketing. Please choose your cookie preferences below.{" "}
                         <Link
                           href="/privacy"
                           style={{ color: ACCENT, textDecoration: "underline", textUnderlineOffset: 3 }}
